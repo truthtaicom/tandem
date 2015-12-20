@@ -1,0 +1,17 @@
+<span data-my-translation="challenge_someone" data-language="main.language"></span>
+
+<select name="activitiesSelect" id="activitiesSelect"
+        data-ng-options="option.name for option in main.activities track by option.id"
+        ng-model="main.chosenActivity"
+        data-ng-change="main.changeActivity()"></select>
+
+<span data-my-translation="within" data-language="main.language"></span>
+
+<select name="positionsSelect" id="positionsSelect"
+        data-ng-options="position.name for position in main.positions track by position.id"
+        ng-model="main.chosenPosition"
+        data-ng-change="main.changePosition()"></select>
+
+<span data-my-translation="challenge_someone_2" data-language="main.language"></span>
+
+<a href="/#search">Search</a>

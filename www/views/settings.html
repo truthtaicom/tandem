@@ -1,0 +1,5 @@
+<span data-my-translation="language" language="settings.language"></span>
+<select name="mySelect" id="mySelect"
+        ng-options="option.name for option in settings.data.availableOptions track by option.id"
+        ng-model="settings.data.selectedOption"
+        data-ng-change="settings.changeLanguage()"></select>
