@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: AlertService', function () {
+describe('Service: AlertService', function () {
 
     // load the controller's module
     beforeEach(module('tandemApp'));

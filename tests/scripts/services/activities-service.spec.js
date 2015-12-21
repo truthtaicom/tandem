@@ -73,4 +73,13 @@ describe('Service: ActivitiesService', function () {
         expect(activitiesService.FilterService.filterObjectFromArray).toHaveBeenCalled();
     }));
 
+    it('should receive a broadcast', inject(function () {
+        var eventEmitted = false;
+        activitiesService.$rootScope.$on("language-changed", function() {
+            eventEmitted = true;
+        });
+        activitiesService.$rootScope.$broadcast('language-changed');
+        //run code to test
+        expect(eventEmitted).toBe(true);
+    }));
 });

@@ -47,4 +47,13 @@ describe('Controller: SettingsController', function () {
     it('should have a property data.selectedOption', inject(function () {
         expect(SettingsController.data.selectedOption).toBe(SettingsController.languageSettings[1]);
     }));
+
+
+    it('should call $rootScope.$broadcast', inject(function () {
+        spyOn(SettingsController.$rootScope, '$broadcast');
+        SettingsController.changeLanguage();
+        expect(SettingsController.$rootScope.$broadcast).toHaveBeenCalled();
+    }));
+
+
 });

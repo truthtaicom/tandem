@@ -18,11 +18,12 @@ var ActivitiesService = (function () {
         this.activitiesData = activitiesData;
         this.FilterService = FilterService;
         this.LanguageService = LanguageService;
+        this.$rootScope = $rootScope;
         // internal vars
         this.activityId = localStorage.getItem('tandemApp_selectedActivity') ? localStorage.getItem('tandemApp_selectedActivity') : 36; // 36 === deutsch
         this.activities = this.FilterService.filterArray(this.activitiesData, this.LanguageService.selectedLanguage);
         this.chosenActivity = this.FilterService.filterObjectFromArray(this.activities, 'id', this.activityId);
-        $rootScope.$on('language-changed', function () {
+        this.$rootScope.$on('language-changed', function () {
             _this.updateActivities();
         });
     }

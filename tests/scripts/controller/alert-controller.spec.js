@@ -48,4 +48,13 @@ describe('Controller: AlertController', function () {
         expect(AlertController.language).toBe('en');
     }));
 
+    it('should receive a broadcast', inject(function () {
+        var eventEmitted = false;
+        AlertController.$rootScope.$on("show-alert", function() {
+            eventEmitted = true;
+        });
+        AlertController.$rootScope.$broadcast('show-alert');
+        //run code to test
+        expect(eventEmitted).toBe(true);
+    }));
 });

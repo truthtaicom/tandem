@@ -115,4 +115,12 @@ describe('Controller: MainController', function () {
         expect(window.latitude).toBe(52.5203457);
         expect(window.longitude).toBe(13.4607137);
     }));
+
+    it('should call $rootScope.$broadcast', inject(function () {
+        spyOn(MainController.$rootScope, '$broadcast');
+        window.longitude = null;
+        MainController.changePosition();
+        expect(MainController.$rootScope.$broadcast).toHaveBeenCalled();
+    }));
+
 });
