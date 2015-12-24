@@ -14,12 +14,6 @@ describe('Controller: MainController', function () {
         MainController = $controller('MainController', {
             $scope: scope
         });
-        window.tandemAppConfig = {};
-        window.tandemAppConfig.geoLocation = function(){
-            // Steinleinhalle
-            window.longitude = 13.4607137;
-            window.latitude = 52.5203457;
-        }
     }));
 
     it('should initialize a controller', inject(function () {
@@ -46,10 +40,6 @@ describe('Controller: MainController', function () {
         expect(MainController.activities.length).toBe(110);
     }));
 
-    it('should have a property chosenActivity id to be 36', inject(function () {
-        expect(MainController.chosenActivity.id).toBe(36);
-    }));
-
     it('should have a property positions', inject(function () {
         expect(MainController.positions).toBeDefined();
     }));
@@ -59,35 +49,54 @@ describe('Controller: MainController', function () {
     }));
 
     it('should have a property positions, 0th element name to be "*your position"', inject(function () {
-        expect(MainController.positions[0].name).toBe('*your position');
+        expect(MainController.positions[0].name).toBe('my position');
     }));
 
-    it('should have a property chosenPosition', inject(function () {
-        expect(MainController.chosenPosition).toBeDefined();
+    it('should have a property offerObj', inject(function () {
+        expect(MainController.offerObj).toBeDefined();
     }));
 
-    it('should have a property chosenPosition; id to be 2', inject(function () {
-        expect(MainController.chosenPosition.id).toBe(2);
+    it('should have a property offerObj; id to be 36', inject(function () {
+        expect(MainController.offerObj.id).toBe(36);
     }));
 
     it('should have a changeActivity method', inject(function () {
-        expect(MainController.changeActivity).toBeDefined();
+        expect(MainController.changeOffer).toBeDefined();
     }));
 
-    it('should reset the chosenActivity when calling the changeActivity method ', inject(function () {
-        MainController.chosenActivity = MainController.activities[56];
-        MainController.changeActivity();
-        expect(MainController.ActivitiesService.activityId).toBe(57);
+    it('should reset offerId when calling the changeOffer method', inject(function () {
+        MainController.offerObj = MainController.activities[56];
+        MainController.changeOffer();
+        expect(MainController.ActivitiesService.offerId).toBe(57);
     }));
 
-    it('should call a ActivitiesService.update() when calling the changeActivity method', inject(function () {
-        //MainController.chosenActivity = MainController.activities[56];
+    it('should call a ActivitiesService.update() when calling the changeOffer method', inject(function () {
         spyOn(MainController.ActivitiesService, 'update');
-        MainController.changeActivity();
+        MainController.changeOffer();
         expect(MainController.ActivitiesService.update).toHaveBeenCalled();
     }));
 
-    it('should have a changePosition method', inject(function () {
+	it('should have a property searchObj', inject(function () {
+		expect(MainController.searchObj).toBeDefined();
+	}));
+
+	it('should have a property searchObj; id to be 36', inject(function () {
+		expect(MainController.searchObj.id).toBe(36);
+	}));
+
+	it('should reset searchId when calling the changeSearch method', inject(function () {
+		MainController.searchObj = MainController.activities[56];
+		MainController.changeSearch();
+		expect(MainController.ActivitiesService.searchId).toBe(57);
+	}));
+
+	it('should call a ActivitiesService.update() when calling the changeSearch method', inject(function () {
+		spyOn(MainController.ActivitiesService, 'update');
+		MainController.changeSearch();
+		expect(MainController.ActivitiesService.update).toHaveBeenCalled();
+	}));
+
+	it('should have a changePosition method', inject(function () {
         expect(MainController.changePosition).toBeDefined();
     }));
 
@@ -110,10 +119,10 @@ describe('Controller: MainController', function () {
     }));
 
     it('should set window.longitude and window.latitude after calling window.tandemAppConfig.geoLocation()', inject(function () {
-        MainController.chosenPosition = MainController.positions[0];
+        MainController.chosenPosition = MainController.positions[1];
         MainController.changePosition();
-        expect(window.latitude).toBe(52.5203457);
-        expect(window.longitude).toBe(13.4607137);
+        expect(MainController.chosenPosition.latitude).toBe('50.783');
+        expect(MainController.chosenPosition.longitude).toBe('6.083');
     }));
 
     it('should call $rootScope.$broadcast', inject(function () {

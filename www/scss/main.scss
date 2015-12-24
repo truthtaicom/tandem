@@ -1,0 +1,92 @@
+@import "reset";
+@import "colors";
+@import "buttons";
+@import "icons";
+/**
+ * Body
+ */
+body{
+  width: 100%;
+  color: $color-grey;
+  background-color: $color-white;
+}
+input[type="text"],
+input[type="password"],
+input[type="phone"],
+textarea,
+select {
+  color: $color-grey;
+  background-color: $color-white;
+  font-size: 125%;
+}
+
+/**
+ *
+ */
+.header,
+.footer{
+  position: fixed;
+  width: 90%;
+  padding: 5%;
+  left:0;
+  height: 40px;
+  z-index: 999;
+  > * {
+    color: $color-white;
+  }
+}
+
+.header{
+  top: 0;
+  height: 60px;
+  padding: 0 5%;
+  background-color: $color-green-light;
+}
+
+.footer{
+  bottom:0;
+  height: 50px;
+  padding: 0 5%;
+  background-color: $color-green-light;
+  color: $color-white;
+  font-size: 30px;
+  > div {
+    margin-top: 5px;
+  }
+}
+.container{
+  padding: 60px 5%;
+}
+
+/**
+ * divs
+ */
+.row{
+  margin: 5px 0;
+}
+.g33{
+  float: left;
+  width: 33%;
+}
+.text-center{
+  text-align: center;
+}
+/**
+ * icons
+ */
+.icon{
+  color: $color-white;
+  &.active-true{
+    color: green;
+  }
+}
+
+/**
+ * Fonts
+ */
+.green-font{
+  color: $color-green-light;
+}
+.red-font{
+  color: $color-red;
+}

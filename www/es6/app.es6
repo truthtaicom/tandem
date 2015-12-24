@@ -42,7 +42,7 @@ angular.module('tandemApp', ['ngRoute'])
                 redirectTo: '/'
             });
     }])
-    .constant('restApiUrl', 'http://localhost/scoopedAPI/')
+    .constant('restApiUrl', 'http://localhost/cafelingo/api/tandem/')
     .constant('languageSettings', [
         {id: 'de', name: 'Deutsch'},
         {id: 'en', name: 'English'}

@@ -38,28 +38,31 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-<!--
-        <link rel="stylesheet" type="text/css" href="css/index.css">
--->
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
 
         <script type="text/javascript" src="cordova.js"></script>
 
     </head>
     <body data-ng-app="tandemApp" data-ng-cloak>
 
-        <div data-ng-controller="AlertController as alert">
-            <div data-ng-if="alert.alerts.retrieving_position" data-my-translation="retrieving_position"></div>
-            <div data-ng-if="alert.alerts.retrieving_searchresults" data-my-translation="retrieving_searchresults"></div>
+        <div class="header" data-ng-controller="AlertController as alert">
+            <div data-ng-show="alert.alerts.retrieving_position" data-my-translation="retrieving_position"></div>
+            <div data-ng-show="alert.alerts.retrieving_searchresults" data-my-translation="retrieving_searchresults"></div>
         </div>
 
-        <div data-ng-view></div>
+        <div class="container" data-ng-view></div>
 
-        <div data-ng-controller="FooterController as footer">
-
-            <div>
-                <a href="#/">Home</a>
-                <a href="#/search">Search</a>
-                <a href="#/settings">Settings</a>
+        <div class="footer" data-ng-controller="FooterController as footer">
+            <div class="grow">
+                <div class="g33 text-center">
+                    <a href="#/"><span class="icon icon-search" data-ng-class="{ 'active-true' : footer.location === '/' }"></span></a>
+                </div>
+                <div class="g33 text-center">
+                    <a href="#/search"><span class="icon icon-target" data-ng-class="{ 'active-true' : footer.location === '/search' }"></span></a>
+                </div>
+                <div class="g33 text-center">
+                    <a href="#/settings"><span class="icon icon-settings" data-ng-class="{ 'active-true' : footer..location === '/settings' }"></span></a>
+                </div>
             </div>
         </div>
 
@@ -71,14 +74,21 @@
                 device: false
             };
 
+            window.tandemAppConfig.latitude = null;
+            window.tandemAppConfig.longitude = null;
+
             window.tandemAppConfig.showPosition = function(position) {
                 /*
                  * we always need the new location !!!
                  */
+                window.tandemAppConfig.latitude = position.coords.latitude;
+                window.tandemAppConfig.longitude = position.coords.longitude;
+
                 window.latitude = position.coords.latitude;
                 window.longitude = position.coords.longitude;
-                console.log('GPS latitude -> ' +window.latitude);
-                console.log('GPS longitude -> ' +window.longitude);
+
+                console.log('GPS latitude -> ' +window.tandemAppConfig.latitude);
+                console.log('GPS longitude -> ' +window.tandemAppConfig.longitude);
             };
 
             window.tandemAppConfig.showError =function(error) {
@@ -86,19 +96,26 @@
             };
 
             window.tandemAppConfig.geoLocation = function() {
-                console.log('calling getting location');
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(window.tandemAppConfig.showPosition, window.tandemAppConfig.showError, { maximumAge: 91000, timeout: 50000, enableHighAccuracy: true});
-                    /*
-                     * call the function again if no position has been found
-                     */
-                    if ((typeof window.latitude === 'undefined' || !window.latitude || typeof window.longitude === 'undefined' || !window.longitude)) {
-                        window.setTimeout(function(){
-                            window.tandemAppConfig.geoLocation();
-                        },5000);
-                    }
-                }
+                console.log('window.latitude : ', window.latitude , ' window.longitude ', window.longitude);
+                return navigator.geolocation.getCurrentPosition(window.tandemAppConfig.showPosition, window.tandemAppConfig.showError, { maximumAge: 91000, timeout: 50000, enableHighAccuracy: true});
             };
+
+
+//            window.tandemAppConfig.geoLocation = function() {
+//                if (navigator.geolocation) {
+//                    navigator.geolocation.getCurrentPosition(window.tandemAppConfig.showPosition, window.tandemAppConfig.showError, { maximumAge: 91000, timeout: 50000, enableHighAccuracy: true});
+//                    /*
+//                     * call the function again if no position has been found
+//                     */
+//                    console.log('window.latitude : ', window.latitude , ' window.longitude ', window.longitude);
+//
+//                    if ((typeof window.latitude === 'undefined' || !window.latitude || typeof window.longitude === 'undefined' || !window.longitude)) {
+//                        window.setTimeout(function(){
+//                            window.tandemAppConfig.geoLocation();
+//                        },5000);
+//                    }
+//                }
+//            };
 
             if (typeof window.cordova !== 'undefined') {
                 console.log('is Cordova ! ');

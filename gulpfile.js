@@ -54,7 +54,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('sass', function(done) {
-    gulp.src('./www/scss/*.scss')
+    gulp.src('./www/scss/main.scss')
         .pipe(sass())
         .pipe(gulp.dest('./www/styles/'))
         //.pipe(minifyCss({

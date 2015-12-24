@@ -6,10 +6,12 @@ class ActivitiesService {
         this.LanguageService = LanguageService;
         this.$rootScope = $rootScope;
         // internal vars
-        this.activityId = localStorage.getItem('tandemApp_selectedActivity') ? localStorage.getItem('tandemApp_selectedActivity') : 36; // 36 === deutsch
-        this.activities = this.FilterService.filterArray(this.activitiesData, this.LanguageService.selectedLanguage);
-        this.chosenActivity = this.FilterService.filterObjectFromArray(this.activities, 'id', this.activityId);
-        this.$rootScope.$on('language-changed', () => {
+        this.offerId = localStorage.getItem('tandemApp_activities_offerId') ? localStorage.getItem('tandemApp_activities_offerId') : 36; // 36 === deutsch
+		this.searchId = localStorage.getItem('tandemApp_activities_searchId') ? localStorage.getItem('tandemApp_activities_searchId') : 36; // 36 === deutsch
+		this.activities = this.FilterService.filterArray(this.activitiesData, this.LanguageService.selectedLanguage);
+        this.offerObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.offerId);
+		this.searchObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.searchId);
+		this.$rootScope.$on('language-changed', () => {
             this.updateActivities();
         });
     }
@@ -20,9 +22,11 @@ class ActivitiesService {
     }
 
     update () {
-        localStorage.setItem('tandemApp_selectedActivity', this.activityId);
-        this.chosenActivity = this.FilterService.filterObjectFromArray(this.activities, 'id', this.activityId);
-    }
+        localStorage.setItem('tandemApp_activities_offerId', this.offerId);
+		this.offerObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.offerId);
+		localStorage.setItem('tandemApp_activities_searchId', this.searchId);
+		this.searchObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.searchId);
+	}
 
 }
 

@@ -1,39 +1,52 @@
 class MainController {
-    constructor ($rootScope, ActivitiesService, LanguageService, positionsData, AlertService, PositionService) {
+    constructor ($rootScope, $timeout, ActivitiesService, LanguageService, positionsData, AlertService, PositionService) {
         // DI
         this.$rootScope = $rootScope;
-        this.LanguageService = LanguageService;
+        this.$timeout = $timeout;
+		this.LanguageService = LanguageService;
         this.ActivitiesService = ActivitiesService;
         this.positions = positionsData;
         this.AlertService = AlertService;
         this.PositionService = PositionService;
-        // local vars
-        this.positions[0].name = this.LanguageService.selectedLanguage === 'de' ? '*deiner Position' : '*your position';
+		// local vars
+        this.positions[0].name = this.LanguageService.selectedLanguage === 'de' ? 'meiner Position' : 'my position';
         this.language = this.LanguageService.selectedLanguage;
         this.activities = this.ActivitiesService.activities;
-        this.chosenActivity = this.ActivitiesService.chosenActivity;
+        this.offerObj = this.ActivitiesService.offerObj;
+		this.searchObj = this.ActivitiesService.searchObj;
         this.chosenPosition = this.PositionService.chosenPosition;
-    }
-    changeActivity () {
-        this.ActivitiesService.activityId = this.chosenActivity.id;
+		this.showAlert();
+	}
+	showAlert () {
+		this.PositionService.updatePosition();
+		if (!this.chosenPosition.longitude || !this.chosenPosition.latitude) {
+			this.AlertService.alerts.retrieving_position = true;
+			this.$rootScope.$broadcast('show-alert');
+			this.$timeout(() => {
+				this.showAlert();
+			}, 2000, true);
+		} else {
+			this.AlertService.alerts.retrieving_position = false;
+			this.$rootScope.$broadcast('show-alert');
+		}
+	}
+    changeOffer () {
+		this.ActivitiesService.offerId = this.offerObj.id;
         this.ActivitiesService.update();
+		this.showAlert();
     }
+	changeSearch () {
+		this.ActivitiesService.searchId = this.searchObj.id;
+		this.ActivitiesService.update();
+		this.showAlert();
+	}
     changePosition () {
-        window.longitude = this.chosenPosition.longitude;
-        window.latitude = this.chosenPosition.latitude;
-        this.PositionService.update(this.chosenPosition);
-        if (!window.longitude || !window.latitude) {
-            this.AlertService.alerts.retrieving_position = true;
-            window.tandemAppConfig.geoLocation();
-            //broadcast event
-            this.$rootScope.$broadcast('show-alert');
-        } else {
-            this.AlertService.alerts.retrieving_position = false;
-        }
-    }
+		this.PositionService.update(this.chosenPosition);
+		this.showAlert();
+	}
 }
 
 
-MainController.$inject = ['$rootScope', 'ActivitiesService', 'LanguageService', 'positionsData', 'AlertService', 'PositionService'];
+MainController.$inject = ['$rootScope', '$timeout', 'ActivitiesService', 'LanguageService', 'positionsData', 'AlertService', 'PositionService'];
 
 export { MainController };

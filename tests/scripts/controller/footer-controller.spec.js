@@ -20,4 +20,8 @@ describe('Controller: FooterController', function () {
         expect(FooterController).toBeDefined();
     }));
 
+	it('should have a variable location', inject(function () {
+		expect(FooterController.location).toBeDefined();
+	}));
+
 });

@@ -1,17 +1,36 @@
-<span data-my-translation="challenge_someone" data-language="main.language"></span>
-
-<select name="activitiesSelect" id="activitiesSelect"
-        data-ng-options="option.name for option in main.activities track by option.id"
-        ng-model="main.chosenActivity"
-        data-ng-change="main.changeActivity()"></select>
-
-<span data-my-translation="within" data-language="main.language"></span>
-
-<select name="positionsSelect" id="positionsSelect"
-        data-ng-options="position.name for position in main.positions track by position.id"
-        ng-model="main.chosenPosition"
-        data-ng-change="main.changePosition()"></select>
-
-<span data-my-translation="challenge_someone_2" data-language="main.language"></span>
-
-<a href="/#search">Search</a>
+    <div class="row">
+        <span data-my-translation="i_search_someone_to" data-language="main.language"></span>
+    </div>
+    <div class="row">
+        <select name="offerSelect" id="offerSelect"
+            data-ng-options="option.name for option in main.activities track by option.id"
+            ng-model="main.offerObj"
+            data-ng-change="main.changeOffer()"></select>
+    </div>
+    <div class="row">
+        <span data-my-translation="i_search_someone_to_2" data-language="main.language"></span>
+        <span data-my-translation="and_offer" data-language="main.language"></span>
+    </div>
+    <div class="row">
+        <select name="searchSelect" id="searchSelect"
+            data-ng-options="option.name for option in main.activities track by option.id"
+            ng-model="main.searchObj"
+            data-ng-change="main.changeSearch()"></select>
+    </div>
+    <div class="row">
+        <span data-my-translation="within" data-language="main.language"></span>
+    </div>
+    <div class="row">
+        <select name="positionsSelect" id="positionsSelect"
+            data-ng-options="position.name for position in main.positions track by position.id"
+            ng-model="main.chosenPosition"
+            data-ng-change="main.changePosition()"></select>
+    </div>
+    <div class="row">
+        <span data-my-translation="challenge_someone_2" data-language="main.language"></span>
+    </div>
+    <div class="row">
+        <a class="btn text-center search-button" href="#/search">
+            <span class="icon icon-search"></span>
+        </a>
+    </div>

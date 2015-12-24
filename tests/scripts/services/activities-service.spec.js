@@ -9,8 +9,9 @@ describe('Service: ActivitiesService', function () {
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, ActivitiesService) {
-        localStorage.removeItem('tandemApp_selectedActivity');
-        activitiesService = ActivitiesService;
+        localStorage.removeItem('tandemApp_activities_offerId');
+		localStorage.removeItem('tandemApp_activities_searchId');
+		activitiesService = ActivitiesService;
     }));
 
     it('should initialize a service', inject(function () {
@@ -49,13 +50,37 @@ describe('Service: ActivitiesService', function () {
         expect(activitiesService.activities[1].name).toBe('Albanian');
     }));
 
-    it('should have a property chosenActivity', inject(function () {
-        expect(activitiesService.chosenActivity).toBeDefined();
+    it('should have a property offerId', inject(function () {
+        expect(activitiesService.offerId).toBeDefined();
     }));
 
-    it('should have a property chosenActivity; to be German', inject(function () {
-        expect(activitiesService.chosenActivity.name).toBe('German');
+    it('should have a property offerId to be 36', inject(function () {
+        expect(activitiesService.offerId).toBe(36);
     }));
+
+	it('should have a property offerObj', inject(function () {
+		expect(activitiesService.offerObj).toBeDefined();
+	}));
+
+	it('should have a property offerObj name to be "German"', inject(function () {
+		expect(activitiesService.offerObj.name).toBe('German');
+	}));
+
+	it('should have a property searchId', inject(function () {
+		expect(activitiesService.searchId).toBeDefined();
+	}));
+
+	it('should have a property searchId to be 36', inject(function () {
+		expect(activitiesService.searchId).toBe(36);
+	}));
+
+	it('should have a property searchObj', inject(function () {
+		expect(activitiesService.searchObj).toBeDefined();
+	}));
+
+	it('should have a property searchObj name to be "German"', inject(function () {
+		expect(activitiesService.searchObj.name).toBe('German');
+	}));
 
     it('should have a method updateActivities', inject(function () {
         expect(activitiesService.updateActivities).toBeDefined();

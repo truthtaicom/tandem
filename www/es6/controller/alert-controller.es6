@@ -4,11 +4,11 @@ class AlertController {
         this.$rootScope = $rootScope;
         this.AlertService = AlertService;
         this.alerts = this.AlertService.alerts;
-        this.LanguageService = LanguageService;
+		this.LanguageService = LanguageService;
         this.language = this.LanguageService.selectedLanguage;
-        this.$rootScope.$on('show-alert', () => {
-            this.alerts = this.AlertService.alerts;
-        });
+		this.$rootScope.$on('show-alert', () => {
+		 	this.alerts = this.AlertService.alerts;
+		});
     }
 }
 
