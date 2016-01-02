@@ -50,7 +50,7 @@
             <div data-ng-show="alert.alerts.retrieving_searchresults" data-my-translation="retrieving_searchresults"></div>
         </div>
 
-        <div class="container" data-ng-view></div>
+        <div data-ng-view></div>
 
         <div class="footer" data-ng-controller="FooterController as footer">
             <div class="grow">
@@ -61,7 +61,7 @@
                     <a href="#/search"><span class="icon icon-target" data-ng-class="{ 'active-true' : footer.location === '/search' }"></span></a>
                 </div>
                 <div class="g33 text-center">
-                    <a href="#/settings"><span class="icon icon-settings" data-ng-class="{ 'active-true' : footer..location === '/settings' }"></span></a>
+                    <a href="#/settings"><span class="icon icon-settings" data-ng-class="{ 'active-true' : footer.location === '/settings' }"></span></a>
                 </div>
             </div>
         </div>
@@ -134,7 +134,8 @@
 
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-
+        <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-slider/dist/slider.js"></script>
         <script type="text/javascript" src="data/translations/de.js"></script>
         <script type="text/javascript" src="data/translations/en.js"></script>
         <script type="text/javascript" src="scripts/bundle.js"></script>

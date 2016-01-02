@@ -14,7 +14,12 @@ describe('Controller: MainController', function () {
         MainController = $controller('MainController', {
             $scope: scope
         });
-    }));
+		window.tandemAppConfig = {};
+		window.tandemAppConfig.geoLocation = function(){
+			return true;
+		};
+
+	}));
 
     it('should initialize a controller', inject(function () {
         expect(MainController).toBeDefined();

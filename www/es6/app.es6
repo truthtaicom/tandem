@@ -20,7 +20,7 @@ import { LanguageService } from './services/language-service';
 import { AlertService } from './services/alert-service';
 import { PositionService } from './services/position-service';
 
-angular.module('tandemApp', ['ngRoute'])
+angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -49,7 +49,12 @@ angular.module('tandemApp', ['ngRoute'])
     ])
     .constant('defaultDistance', 10)
     .constant('maxDistance', 100)
-    .constant('positionsData', positionsData)
+    .constant('svgIcon',
+		'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' +
+		'<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' +
+		'</svg>'
+	)
+	.constant('positionsData', positionsData)
     .constant('activitiesData', activitiesData)
     .run(function () {
     })

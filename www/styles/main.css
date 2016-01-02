@@ -192,6 +192,79 @@ a.search-button:hover span,
 .icon-pfeil-more:before {
   content: "\e60b"; }
 
+/* line 2, slider.scss */
+slider, [slider] {
+  display: inline-block;
+  position: relative;
+  height: 4px;
+  width: 100%;
+  margin: 25px 0;
+  vertical-align: middle; }
+
+/* line 10, slider.scss */
+slider div, [slider] div {
+  white-space: nowrap;
+  position: absolute; }
+
+/* line 14, slider.scss */
+slider div.bar, [slider] div.bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  background: #444;
+  overflow: hidden; }
+
+/* line 21, slider.scss */
+slider div.bar .selection, [slider] div.bar .selection {
+  width: 0%;
+  height: 100%;
+  background: #13b6ff; }
+
+/* line 28, slider.scss */
+slider div.handle, [slider] div.handle {
+  background-color: #fff;
+  border: 6px solid #8bc717;
+  border-radius: 100%;
+  cursor: pointer;
+  height: 15px;
+  top: -10px;
+  width: 15px;
+  z-index: 2; }
+
+/* line 38, slider.scss */
+slider div.handle:after, [slider] div.handle:after {
+  content: '';
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 100%; }
+
+/* line 48, slider.scss */
+slider div.handle:after:hover, [slider] div.handle:after:hover {
+  background-color: #fff; }
+
+/* line 53, slider.scss */
+slider div.handle.active:after, [slider] div.handle.active:after {
+  background-color: #fff; }
+
+/* line 58, slider.scss */
+slider div.bubble, [slider] div.bubble {
+  cursor: default;
+  top: -22px;
+  padding: 1px 3px 1px 3px;
+  font-size: 0.7em; }
+  slider div.bubble.limit, [slider] div.bubble.limit {
+    display: none; }
+  slider div.bubble.value:after, [slider] div.bubble.value:after {
+    content: 'km'; }
+
+/* line 70, slider.scss */
+slider div.bubble.limit, [slider] div.bubble.limit {
+  color: #777; }
+
 /**
  * Body
  */
@@ -255,6 +328,16 @@ select {
 
 .text-center {
   text-align: center; }
+
+#forRadar {
+  margin-top: 60px; }
+
+#slider {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  width: 90%;
+  padding: 0 5% 0 5%; }
 
 /**
  * icons

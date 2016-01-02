@@ -21,9 +21,10 @@ var PositionService = (function () {
 	_createClass(PositionService, [{
 		key: 'updatePosition',
 		value: function updatePosition() {
+			console.log('...', this.chosenPosition);
 			if (parseInt(this.chosenPosition.id) === 0) {
-				this.chosenPosition.latitude = window.latitude;
-				this.chosenPosition.longitude = window.longitude;
+				this.chosenPosition.latitude = typeof window.latitude !== 'undefined' ? window.latitude : null;
+				this.chosenPosition.longitude = typeof window.longitude !== 'undefined' ? window.longitude : null;
 			}
 		}
 	}, {

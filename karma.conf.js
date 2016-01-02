@@ -11,7 +11,9 @@ module.exports = function(config) {
         files: [
             'www/bower_components/angular/angular.min.js',
             'www/bower_components/angular-route/angular-route.min.js',
-            'node_modules/angular-mocks/angular-mocks.js',
+			'www/bower_components/angular-sanitize/angular-sanitize.min.js',
+			'www/bower_components/angular-slider/dist/slider.js',
+			'node_modules/angular-mocks/angular-mocks.js',
             'www/scripts/bundle.js',
             'tests/**/*.js'
         ],

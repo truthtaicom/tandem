@@ -2,6 +2,7 @@
 @import "colors";
 @import "buttons";
 @import "icons";
+@import "slider";
 /**
  * Body
  */
@@ -70,6 +71,16 @@ select {
 }
 .text-center{
   text-align: center;
+}
+#forRadar{
+  margin-top: 60px;
+}
+#slider {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  width: 90%;
+  padding: 0 5% 0 5%;
 }
 /**
  * icons
