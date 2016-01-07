@@ -65,6 +65,10 @@ select {
 .row{
   margin: 5px 0;
 }
+.g25{
+  float: left;
+  width: 25%;
+}
 .g33{
   float: left;
   width: 33%;
@@ -81,6 +85,15 @@ select {
   left: 0;
   width: 90%;
   padding: 0 5% 0 5%;
+}
+/*
+ * float
+ */
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
 }
 /**
  * icons
@@ -100,4 +113,11 @@ select {
 }
 .red-font{
   color: $color-red;
+}
+
+/*
+ * Forms
+ */
+.label{
+  font-size: 80%;
 }

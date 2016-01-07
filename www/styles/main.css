@@ -77,7 +77,7 @@ a:active {
   -ms-border-radius: 6px;
   border-radius: 6px;
   border: 1px solid #8bc717;
-  color: #FFF;
+  color: #FFF !important;
   text-decoration: none;
   text-shadow: none;
   padding: 5px 5% 5px 5%;
@@ -85,6 +85,8 @@ a:active {
   min-height: 34px; }
   .btn:hover {
     background-color: #8bc717; }
+  .btn span {
+    font-size: 34px; }
 
 a.search-button,
 .search-button
@@ -110,15 +112,20 @@ a.search-button:hover span,
     margin-top: 25px;
     font-size: 50px; }
 
+.btn-border-green {
+  background-color: #FFF !important;
+  color: #8bc717 !important; }
+
 @font-face {
   font-family: 'scooped';
-  src: url("../styles/fonts/scooped.eot?qtspmz");
-  src: url("../styles/fonts/scooped.eot?#iefixqtspmz") format("embedded-opentype"), url("../styles/fonts/scooped.woff?qtspmz") format("woff"), url("../styles/fonts/scooped.ttf?qtspmz") format("truetype"), url("../styles/fonts/scooped.svg?qtspmz#scooped") format("svg");
+  src: url("fonts/scooped.eot?9d9sfl");
+  src: url("fonts/scooped.eot?9d9sfl#iefix") format("embedded-opentype"), url("fonts/scooped.ttf?9d9sfl") format("truetype"), url("fonts/scooped.woff?9d9sfl") format("woff"), url("fonts/scooped.svg?9d9sfl#scooped") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 [class^="icon-"], [class*=" icon-"] {
-  font-family: 'scooped';
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'scooped' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -129,26 +136,8 @@ a.search-button:hover span,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.icon-forward:before {
-  content: "\e615"; }
-
-.icon-maennlich:before {
-  content: "\e612"; }
-
-.icon-weiblich:before {
-  content: "\e613"; }
-
-.icon-scoop:before {
-  content: "\e602"; }
-
-.icon-pencil:before {
-  content: "\e600"; }
-
-.icon-envelope:before {
-  content: "\e601"; }
-
-.icon-user:before {
-  content: "\e60d"; }
+.icon-info:before {
+  content: "\e900"; }
 
 .icon-search:before {
   content: "\e604"; }
@@ -158,36 +147,6 @@ a.search-button:hover span,
 
 .icon-target:before {
   content: "\e60c"; }
-
-.icon-cancel-circle:before {
-  content: "\e603"; }
-
-.icon-close:before {
-  content: "\e607"; }
-
-.icon-spinner:before {
-  content: "\e609"; }
-
-.icon-remove:before {
-  content: "\e610"; }
-
-.icon-blocked:before {
-  content: "\e60a"; }
-
-.icon-checkmark:before {
-  content: "\e606"; }
-
-.icon-minus:before {
-  content: "\e608"; }
-
-.icon-plus:before {
-  content: "\e60e"; }
-
-.icon-loop:before {
-  content: "\e60f"; }
-
-.icon-arrow-left:before {
-  content: "\e611"; }
 
 .icon-pfeil-more:before {
   content: "\e60b"; }
@@ -322,6 +281,10 @@ select {
 .row {
   margin: 5px 0; }
 
+.g25 {
+  float: left;
+  width: 25%; }
+
 .g33 {
   float: left;
   width: 33%; }
@@ -339,6 +302,15 @@ select {
   width: 90%;
   padding: 0 5% 0 5%; }
 
+/*
+ * float
+ */
+.pull-left {
+  float: left; }
+
+.pull-right {
+  float: right; }
+
 /**
  * icons
  */
@@ -355,3 +327,9 @@ select {
 
 .red-font {
   color: #f00; }
+
+/*
+ * Forms
+ */
+.label {
+  font-size: 80%; }

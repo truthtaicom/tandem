@@ -11,6 +11,10 @@ var _searchController = require('./controller/search-controller');
 
 var _settingsController = require('./controller/settings-controller');
 
+var _myDataController = require('./controller/my-data-controller');
+
+var _myProfileController = require('./controller/my-profile-controller');
+
 var _alertController = require('./controller/alert-controller');
 
 var _footerController = require('./controller/footer-controller');
@@ -47,15 +51,27 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider']).config(['$ro
         templateUrl: 'views/settings.html',
         controller: 'SettingsController',
         controllerAs: 'settings'
+    }).when('/data', {
+        templateUrl: 'views/my-data.html',
+        controller: 'MyDataController',
+        controllerAs: 'data'
+    }).when('/profile', {
+        templateUrl: 'views/my-profile.html',
+        controller: 'MyProfileController',
+        controllerAs: 'profile'
+    }).when('/impressum', {
+        templateUrl: 'views/impressum.html'
+    }).when('/datenschutz', {
+        templateUrl: 'views/datenschutz.html'
     }).otherwise({
         redirectTo: '/'
     });
-}]).constant('restApiUrl', 'http://localhost/cafelingo/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory);
+}]).constant('restApiUrl', 'http://localhost/cafelingo/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('MyDataController', _myDataController.MyDataController).controller('MyProfileController', _myProfileController.MyProfileController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory);
 
 // directives
 
 
-},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/main-controller":4,"./controller/search-controller":5,"./controller/settings-controller":6,"./data/activities/activities":7,"./data/positions/de":8,"./directives/translation-directive":9,"./services/activities-service":10,"./services/alert-service":11,"./services/data-service":12,"./services/filter-service":13,"./services/language-service":14,"./services/position-service":15}],2:[function(require,module,exports){
+},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/main-controller":4,"./controller/my-data-controller":5,"./controller/my-profile-controller":6,"./controller/search-controller":7,"./controller/settings-controller":8,"./data/activities/activities":9,"./data/positions/de":10,"./directives/translation-directive":11,"./services/activities-service":12,"./services/alert-service":13,"./services/data-service":14,"./services/filter-service":15,"./services/language-service":16,"./services/position-service":17}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -199,6 +215,64 @@ exports.MainController = MainController;
 
 
 },{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MyDataController = function MyDataController(languageSettings, LanguageService, ActivitiesService) {
+	_classCallCheck(this, MyDataController);
+
+	// DI
+	this.languageSettings = languageSettings;
+	this.LanguageService = LanguageService;
+	this.ActivitiesService = ActivitiesService;
+	// local vars
+	this.userData = localStorage.getItem('tandemApp_userData') ? localStorage.getItem('tandemApp_userData') : {
+		name: 'Hans',
+		email: '',
+		zip: '',
+		city: '',
+		description: '',
+		lang_have: this.ActivitiesService.offerId,
+		lang_seek: this.ActivitiesService.searchId
+	};
+	this.language = this.LanguageService.selectedLanguage;
+};
+
+MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
+
+exports.MyDataController = MyDataController;
+
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MyProfileController = function MyProfileController(languageSettings, LanguageService, ActivitiesService) {
+	_classCallCheck(this, MyProfileController);
+
+	// DI
+	this.languageSettings = languageSettings;
+	this.LanguageService = LanguageService;
+	this.ActivitiesService = ActivitiesService;
+	this.language = this.LanguageService.selectedLanguage;
+};
+
+MyProfileController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
+
+exports.MyProfileController = MyProfileController;
+
+
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -476,7 +550,7 @@ SearchController.$inject = ['$rootScope', '$timeout', 'svgIcon', '$location', 'd
 exports.SearchController = SearchController;
 
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -488,13 +562,13 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SettingsController = (function () {
-    function SettingsController($rootScope, languageSettings, LanguageService) {
+    function SettingsController(languageSettings, LanguageService, ActivitiesService) {
         _classCallCheck(this, SettingsController);
 
         // DI
-        this.$rootScope = $rootScope;
         this.languageSettings = languageSettings;
         this.LanguageService = LanguageService;
+        this.ActivitiesService = ActivitiesService;
         // local vars
         this.language = this.LanguageService.selectedLanguage;
         this.data = {
@@ -508,20 +582,20 @@ var SettingsController = (function () {
         value: function changeLanguage() {
             this.language = this.data.selectedOption.id;
             this.LanguageService.resetLanguage(this.language);
-            // broadcast to translation directive
-            this.$rootScope.$broadcast('language-changed');
+            //reload app
+            window.location.reload();
         }
     }]);
 
     return SettingsController;
 })();
 
-SettingsController.$inject = ['$rootScope', 'languageSettings', 'LanguageService'];
+SettingsController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
 
 exports.SettingsController = SettingsController;
 
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -970,7 +1044,7 @@ var activitiesData = exports.activitiesData = [{
 }];
 
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1179,59 +1253,52 @@ var positionsData = exports.positionsData = [{
 }];
 
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var TranslationDirective = (function () {
-    function TranslationDirective($rootScope) {
-        _classCallCheck(this, TranslationDirective);
+  function TranslationDirective(LanguageService) {
+    _classCallCheck(this, TranslationDirective);
 
-        this.$rootScope = $rootScope;
-        this.restrict = 'A';
-        this.transclude = true;
-        this.template = '<span>{{translation}}</span>';
-        this.scope = {
-            'myTranslation': '@',
-            'language': '='
-        };
+    this.restrict = 'A';
+    this.transclude = true;
+    this.template = '<span>{{transCtrl.translation}}</span>';
+    this.scope = {};
+    this.bindToController = {
+      'myTranslation': '@'
+    };
+    this.controllerAs = 'transCtrl';
+    this.controller = function () {
+      console.log('LanguageService : ', LanguageService);
+      this.translation = window.tandemAppConfig.translation[LanguageService.selectedLanguage][this.myTranslation];
+    };
+  }
+
+  _createClass(TranslationDirective, null, [{
+    key: 'directiveFactory',
+    value: function directiveFactory(LanguageService) {
+      TranslationDirective.instance = new TranslationDirective(LanguageService);
+      return TranslationDirective.instance;
     }
+  }]);
 
-    _createClass(TranslationDirective, [{
-        key: 'link',
-        value: function link(scope) {
-            if (!scope.language) {
-                scope.language = localStorage.getItem('tandemApp_selectedLanguage') ? localStorage.getItem('tandemApp_selectedLanguage') : 'en';
-            }
-            scope.translation = window.tandemAppConfig.translation[scope.language][scope.myTranslation];
-            scope.$watch('language', function () {
-                scope.translation = window.tandemAppConfig.translation[scope.language][scope.myTranslation];
-            });
-        }
-    }], [{
-        key: 'directiveFactory',
-        value: function directiveFactory($rootScope) {
-            TranslationDirective.instance = new TranslationDirective($rootScope);
-            return TranslationDirective.instance;
-        }
-    }]);
-
-    return TranslationDirective;
+  return TranslationDirective;
 })();
 
-TranslationDirective.$inject = ['$rootScope'];
+TranslationDirective.$inject = ['LanguageService'];
 
 exports.TranslationDirective = TranslationDirective;
 
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1243,25 +1310,19 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ActivitiesService = (function () {
-    function ActivitiesService($rootScope, activitiesData, FilterService, LanguageService) {
-        var _this = this;
-
+    function ActivitiesService(activitiesData, FilterService, LanguageService) {
         _classCallCheck(this, ActivitiesService);
 
         // DI
         this.activitiesData = activitiesData;
         this.FilterService = FilterService;
         this.LanguageService = LanguageService;
-        this.$rootScope = $rootScope;
         // internal vars
         this.offerId = localStorage.getItem('tandemApp_activities_offerId') ? localStorage.getItem('tandemApp_activities_offerId') : 36; // 36 === deutsch
         this.searchId = localStorage.getItem('tandemApp_activities_searchId') ? localStorage.getItem('tandemApp_activities_searchId') : 36; // 36 === deutsch
         this.activities = this.FilterService.filterArray(this.activitiesData, this.LanguageService.selectedLanguage);
         this.offerObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.offerId);
         this.searchObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.searchId);
-        this.$rootScope.$on('language-changed', function () {
-            _this.updateActivities();
-        });
     }
 
     _createClass(ActivitiesService, [{
@@ -1283,12 +1344,12 @@ var ActivitiesService = (function () {
     return ActivitiesService;
 })();
 
-ActivitiesService.$inject = ['$rootScope', 'activitiesData', 'FilterService', 'LanguageService'];
+ActivitiesService.$inject = ['activitiesData', 'FilterService', 'LanguageService'];
 
 exports.ActivitiesService = ActivitiesService;
 
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1312,7 +1373,7 @@ AlertService.$inject = [];
 exports.AlertService = AlertService;
 
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1350,7 +1411,7 @@ DataService.$inject = ['$http', 'restApiUrl', 'ActivitiesService', 'PositionServ
 exports.DataService = DataService;
 
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1396,7 +1457,7 @@ FilterService.$inject = [];
 exports.FilterService = FilterService;
 
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1430,7 +1491,7 @@ LanguageService.$inject = [];
 exports.LanguageService = LanguageService;
 
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();

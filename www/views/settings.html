@@ -1,7 +1,36 @@
 <div class="container">
-    <span data-my-translation="language" language="settings.language"></span>
-    <select name="mySelect" id="mySelect"
-        ng-options="option.name for option in settings.data.availableOptions track by option.id"
-        ng-model="settings.data.selectedOption"
-        data-ng-change="settings.changeLanguage()"></select>
+    <div class="row">
+        <span class="label" data-my-translation="language"></span>
+        <select
+        data-ng-options="option.name for option in settings.data.availableOptions track by option.id"
+        data-ng-model="settings.data.selectedOption"
+        data-ng-change="settings.changeLanguage()">
+        </select>
+    </div>
+    <div class="row">
+        <a class="btn" href="#/data">
+            <span data-my-translation="my_data"></span>
+            <span class="pull-right icon-pfeil-more"></span>
+        </a>
+    </div>
+    <div class="row">
+        <a class="btn" href="#/profile">
+            <span data-my-translation="my_profile"></span>
+            <span class="pull-right icon-pfeil-more"></span>
+        </a>
+    </div>
+    <div class="row">
+        <a class="btn" href="#/impressum">
+            <span data-my-translation="impressum"></span>
+            <span class="pull-right icon-pfeil-more"></span>
+        </a>
+    </div>
+    <div class="row">
+        <a class="btn" href="#/datenschutz">
+            <span data-my-translation="datenschutz"></span>
+            <span class="pull-right icon-pfeil-more"></span>
+        </a>
+    </div>
+
+
 </div>

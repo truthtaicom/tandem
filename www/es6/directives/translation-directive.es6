@@ -1,31 +1,26 @@
 class TranslationDirective {
-    constructor ($rootScope) {
-        this.$rootScope = $rootScope;
-        this.restrict = 'A';
+    constructor (LanguageService) {
+		this.restrict = 'A';
         this.transclude = true;
-        this.template = '<span>{{translation}}</span>';
-        this.scope = {
-            'myTranslation': '@',
-            'language': '='
-        };
+        this.template = '<span>{{transCtrl.translation}}</span>';
+        this.scope = {};
+		this.bindToController = {
+			'myTranslation': '@'
+		};
+		this.controllerAs = 'transCtrl';
+		this.controller = function () {
+			console.log('LanguageService : ', LanguageService);
+			this.translation = window.tandemAppConfig.translation[ LanguageService.selectedLanguage ][ this.myTranslation ];
+
+		};
     }
 
-    link (scope) {
-        if (!scope.language) {
-            scope.language = localStorage.getItem('tandemApp_selectedLanguage') ? localStorage.getItem('tandemApp_selectedLanguage') : 'en';
-        }
-        scope.translation = window.tandemAppConfig.translation[ scope.language ][ scope.myTranslation ];
-        scope.$watch('language', () => {
-            scope.translation = window.tandemAppConfig.translation[ scope.language ][ scope.myTranslation ];
-        });
-    }
-
-    static directiveFactory ($rootScope) {
-        TranslationDirective.instance = new TranslationDirective($rootScope);
+    static directiveFactory (LanguageService) {
+        TranslationDirective.instance = new TranslationDirective(LanguageService);
         return TranslationDirective.instance;
     }
 }
 
-TranslationDirective.$inject = ['$rootScope'];
+TranslationDirective.$inject = ['LanguageService'];
 
 export { TranslationDirective };

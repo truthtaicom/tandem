@@ -9,25 +9,19 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ActivitiesService = (function () {
-    function ActivitiesService($rootScope, activitiesData, FilterService, LanguageService) {
-        var _this = this;
-
+    function ActivitiesService(activitiesData, FilterService, LanguageService) {
         _classCallCheck(this, ActivitiesService);
 
         // DI
         this.activitiesData = activitiesData;
         this.FilterService = FilterService;
         this.LanguageService = LanguageService;
-        this.$rootScope = $rootScope;
         // internal vars
         this.offerId = localStorage.getItem('tandemApp_activities_offerId') ? localStorage.getItem('tandemApp_activities_offerId') : 36; // 36 === deutsch
         this.searchId = localStorage.getItem('tandemApp_activities_searchId') ? localStorage.getItem('tandemApp_activities_searchId') : 36; // 36 === deutsch
         this.activities = this.FilterService.filterArray(this.activitiesData, this.LanguageService.selectedLanguage);
         this.offerObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.offerId);
         this.searchObj = this.FilterService.filterObjectFromArray(this.activities, 'id', this.searchId);
-        this.$rootScope.$on('language-changed', function () {
-            _this.updateActivities();
-        });
     }
 
     _createClass(ActivitiesService, [{
@@ -49,7 +43,7 @@ var ActivitiesService = (function () {
     return ActivitiesService;
 })();
 
-ActivitiesService.$inject = ['$rootScope', 'activitiesData', 'FilterService', 'LanguageService'];
+ActivitiesService.$inject = ['activitiesData', 'FilterService', 'LanguageService'];
 
 exports.ActivitiesService = ActivitiesService;
 //# sourceMappingURL=activities-service.js.map

@@ -9,13 +9,13 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SettingsController = (function () {
-    function SettingsController($rootScope, languageSettings, LanguageService) {
+    function SettingsController(languageSettings, LanguageService, ActivitiesService) {
         _classCallCheck(this, SettingsController);
 
         // DI
-        this.$rootScope = $rootScope;
         this.languageSettings = languageSettings;
         this.LanguageService = LanguageService;
+        this.ActivitiesService = ActivitiesService;
         // local vars
         this.language = this.LanguageService.selectedLanguage;
         this.data = {
@@ -29,15 +29,15 @@ var SettingsController = (function () {
         value: function changeLanguage() {
             this.language = this.data.selectedOption.id;
             this.LanguageService.resetLanguage(this.language);
-            // broadcast to translation directive
-            this.$rootScope.$broadcast('language-changed');
+            //reload app
+            window.location.reload();
         }
     }]);
 
     return SettingsController;
 })();
 
-SettingsController.$inject = ['$rootScope', 'languageSettings', 'LanguageService'];
+SettingsController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
 
 exports.SettingsController = SettingsController;
 //# sourceMappingURL=settings-controller.js.map
