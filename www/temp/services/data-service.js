@@ -35,6 +35,11 @@ var DataService = (function () {
 		value: function postChange(data) {
 			return this.$http.post(this.restApiUrl + 'change' + '?time=' + new Date().getTime(), data);
 		}
+	}, {
+		key: 'postRegistration',
+		value: function postRegistration(data) {
+			return this.$http.post(this.restApiUrl + 'register' + '?time=' + new Date().getTime(), data);
+		}
 	}]);
 
 	return DataService;

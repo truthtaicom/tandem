@@ -19,7 +19,11 @@ var MyDataController = (function () {
 		this.DataService = DataService;
 		// local vars
 		this.myDataForm = {};
-		this.submitted = false;
+		this.formState = {
+			submitted: false,
+			success: false,
+			error: false
+		};
 		this.userData = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')) : {
 			name: '',
 			email: '',
@@ -50,14 +54,52 @@ var MyDataController = (function () {
 	}, {
 		key: 'submitForm',
 		value: function submitForm() {
+			var _this = this;
+
 			console.log('submitForm');
-			this.submitted = true;
-			//console.log('this.userData : ', this.userData);
-			this.DataService.postChange(this.userData).then(function () {
-				console.log('SUCCESS');
-			}, function () {
-				console.log('ERROR');
-			});
+			this.formState.submitted = true;
+			if (this.myDataForm.$valid) {
+				if (typeof this.userData.token !== 'undefined') {
+					/**
+      * change / update
+      */
+					this.DataService.postChange(this.userData).then(function (data) {
+						if (data.data.toString() === 'true') {
+							console.log('SUCCESS');
+							localStorage.setItem('tandemApp_userData', JSON.stringify(_this.userData));
+							_this.formState.success = true;
+							_this.formState.error = false;
+						} else {
+							_this.formState.success = false;
+							_this.formState.error = true;
+						}
+					}, function () {
+						_this.formState.success = false;
+						_this.formState.error = true;
+					});
+				} else {
+					/**
+      * register
+      */
+					this.userData.lat = typeof window.latitude !== 'undefined' ? window.latitude : 0;
+					this.userData.lon = typeof window.longitude !== 'undefined' ? window.longitude : 0;
+					this.userData.lang_used = this.language;
+					this.DataService.postRegistration(this.userData).then(function (data) {
+						console.log('data : ', data.data.token);
+						if (typeof data.data.token !== 'undefined') {
+							localStorage.setItem('tandemApp_userData', JSON.stringify(data.data));
+							_this.formState.success = true;
+							_this.formState.error = false;
+						} else {
+							_this.formState.success = false;
+							_this.formState.error = true;
+						}
+					}, function () {
+						_this.formState.success = false;
+						_this.formState.error = true;
+					});
+				}
+			}
 		}
 	}]);
 

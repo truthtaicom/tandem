@@ -152,8 +152,10 @@ var LoginController = (function () {
 		this.$location = $location;
 		// local vars
 		this.loginForm = {};
-		this.submitted = false;
-		this.error = false;
+		this.formState = {
+			submitted: false,
+			error: false
+		};
 		this.userData = {
 			username: '',
 			password: ''
@@ -173,18 +175,20 @@ var LoginController = (function () {
 				username: window.GibberishAES.enc(this.userData.username, this.encKey),
 				password: window.GibberishAES.enc(this.userData.password, this.encKey)
 			};
-			this.submitted = true;
-			if (this.userData.username.toString().length > 0 && this.userData.password.toString().length > 0) {
+			this.formState.submitted = true;
+
+			if (this.loginForm.$valid) {
 				this.DataService.postLogin(postData).then(function (data) {
-					console.log('success !!! ', data);
-					var userData = data.data;
-					console.log('userData : ', userData);
-					userData.email = _this.userData.username;
-					localStorage.setItem('tandemApp_userData', JSON.stringify(userData));
-					_this.$location.path('/settings');
+					if (data.data.toString() !== 'false') {
+						var userData = data.data;
+						userData.email = _this.userData.username;
+						localStorage.setItem('tandemApp_userData', JSON.stringify(userData));
+						_this.$location.path('/settings');
+					} else {
+						_this.formState.error = true;
+					}
 				}, function () {
-					console.log('error !!! ');
-					_this.error = true;
+					_this.formState.error = true;
 				});
 			}
 		}
@@ -305,7 +309,11 @@ var MyDataController = (function () {
 		this.DataService = DataService;
 		// local vars
 		this.myDataForm = {};
-		this.submitted = false;
+		this.formState = {
+			submitted: false,
+			success: false,
+			error: false
+		};
 		this.userData = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')) : {
 			name: '',
 			email: '',
@@ -336,14 +344,52 @@ var MyDataController = (function () {
 	}, {
 		key: 'submitForm',
 		value: function submitForm() {
+			var _this = this;
+
 			console.log('submitForm');
-			this.submitted = true;
-			//console.log('this.userData : ', this.userData);
-			this.DataService.postChange(this.userData).then(function () {
-				console.log('SUCCESS');
-			}, function () {
-				console.log('ERROR');
-			});
+			this.formState.submitted = true;
+			if (this.myDataForm.$valid) {
+				if (typeof this.userData.token !== 'undefined') {
+					/**
+      * change / update
+      */
+					this.DataService.postChange(this.userData).then(function (data) {
+						if (data.data.toString() === 'true') {
+							console.log('SUCCESS');
+							localStorage.setItem('tandemApp_userData', JSON.stringify(_this.userData));
+							_this.formState.success = true;
+							_this.formState.error = false;
+						} else {
+							_this.formState.success = false;
+							_this.formState.error = true;
+						}
+					}, function () {
+						_this.formState.success = false;
+						_this.formState.error = true;
+					});
+				} else {
+					/**
+      * register
+      */
+					this.userData.lat = typeof window.latitude !== 'undefined' ? window.latitude : 0;
+					this.userData.lon = typeof window.longitude !== 'undefined' ? window.longitude : 0;
+					this.userData.lang_used = this.language;
+					this.DataService.postRegistration(this.userData).then(function (data) {
+						console.log('data : ', data.data.token);
+						if (typeof data.data.token !== 'undefined') {
+							localStorage.setItem('tandemApp_userData', JSON.stringify(data.data));
+							_this.formState.success = true;
+							_this.formState.error = false;
+						} else {
+							_this.formState.success = false;
+							_this.formState.error = true;
+						}
+					}, function () {
+						_this.formState.success = false;
+						_this.formState.error = true;
+					});
+				}
+			}
 		}
 	}]);
 
@@ -639,39 +685,47 @@ exports.SearchController = SearchController;
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+				value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SettingsController = (function () {
-    function SettingsController(languageSettings, LanguageService, ActivitiesService) {
-        _classCallCheck(this, SettingsController);
+				function SettingsController(languageSettings, LanguageService, ActivitiesService) {
+								_classCallCheck(this, SettingsController);
 
-        // DI
-        this.languageSettings = languageSettings;
-        this.LanguageService = LanguageService;
-        this.ActivitiesService = ActivitiesService;
-        // local vars
-        this.language = this.LanguageService.selectedLanguage;
-        this.data = {
-            availableOptions: this.languageSettings,
-            selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
-        };
-        this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
-    }
+								// DI
+								this.languageSettings = languageSettings;
+								this.LanguageService = LanguageService;
+								this.ActivitiesService = ActivitiesService;
+								// local vars
+								this.language = this.LanguageService.selectedLanguage;
+								this.data = {
+												availableOptions: this.languageSettings,
+												selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
+								};
+								this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
+				}
 
-    _createClass(SettingsController, [{
-        key: 'changeLanguage',
-        value: function changeLanguage(id) {
-            this.language = id;
-            this.LanguageService.resetLanguage(this.language);
-            //reload app
-            window.location.reload();
-        }
-    }]);
+				_createClass(SettingsController, [{
+								key: 'changeLanguage',
+								value: function changeLanguage(id) {
+												this.language = id;
+												this.LanguageService.resetLanguage(this.language);
+												//reload app
+												window.location.reload();
+								}
+				}, {
+								key: 'logout',
+								value: function logout() {
+												localStorage.removeItem('tandemApp_userData');
+												this.token = null;
+												//reload app
+												window.location.reload();
+								}
+				}]);
 
-    return SettingsController;
+				return SettingsController;
 })();
 
 SettingsController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
@@ -1495,6 +1549,11 @@ var DataService = (function () {
 		value: function postChange(data) {
 			return this.$http.post(this.restApiUrl + 'change' + '?time=' + new Date().getTime(), data);
 		}
+	}, {
+		key: 'postRegistration',
+		value: function postRegistration(data) {
+			return this.$http.post(this.restApiUrl + 'register' + '?time=' + new Date().getTime(), data);
+		}
 	}]);
 
 	return DataService;
@@ -1602,6 +1661,7 @@ var PositionService = (function () {
 
 		// DI
 		this.positionsData = positionsData;
+		console.log('positionsData: ', positionsData);
 		// local vars
 		this.chosenPosition = localStorage.getItem('tandemApp_position') ? JSON.parse(localStorage.getItem('tandemApp_position')) : this.positionsData[2]; //Berlin
 	}

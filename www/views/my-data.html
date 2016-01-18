@@ -4,6 +4,14 @@
     </a>
 </div>
 <div class="container">
+    <div class="success" data-ng-if="mydata.formState.success">
+        <span data-my-translation="success_change" data-ng-if="mydata.userData.token"></span>
+        <span data-my-translation="success_registration" data-ng-if="!mydata.userData.token"></span>
+    </div>
+    <div class="error" data-ng-if="mydata.formState.error">
+        <span data-my-translation="error_change" data-ng-if="mydata.userData.token"></span>
+        <span data-my-translation="error_registration" data-ng-if="!mydata.userData.token"></span>
+    </div>
     <form name="mydata.myDataForm" data-ng-submit="mydata.submitForm()" novalidate>
         <div class="row">
             <span class="label" data-my-translation="name"></span>
@@ -11,7 +19,7 @@
                     name="name"
                     required
                     data-ng-model="mydata.userData.name">
-            <div class="error" data-ng-if="mydata.submitted && !mydata.myDataForm.name.$valid">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.name.$valid">
                 <span data-my-translation="error_name"></span>
             </div>
         </div>
@@ -21,7 +29,7 @@
                     name="email"
                     required
                     data-ng-model="mydata.userData.email">
-            <div class="error" data-ng-if="mydata.submitted && !mydata.myDataForm.email.$valid">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.email.$valid">
                 <span data-my-translation="error_email"></span>
             </div>
         </div>
@@ -31,7 +39,7 @@
                     name="zip"
                     required
                     data-ng-model="mydata.userData.zip">
-            <div class="error" data-ng-if="mydata.submitted && !mydata.myDataForm.zip.$valid">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.zip.$valid">
                 <span data-my-translation="error_zip"></span>
             </div>
         </div>
@@ -41,7 +49,7 @@
                     name="city"
                     required
                     data-ng-model="mydata.userData.city">
-            <div class="error" data-ng-if="mydata.submitted && !mydata.myDataForm.city.$valid">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.city.$valid">
                 <span data-my-translation="error_city"></span>
             </div>
         </div>
@@ -50,7 +58,7 @@
             <textarea   name="description"
                         data-ng-model="mydata.userData.description"
                         required></textarea>
-            <div class="error" data-ng-if="mydata.submitted && !mydata.myDataForm.description.$valid">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.description.$valid">
                 <span data-my-translation="error_description"></span>
             </div>
         </div>
@@ -68,11 +76,13 @@
                     data-ng-model="mydata.searchObj"
                     data-ng-change="mydata.changeSearch()"></select>
         </div>
-        <button type="submit" class="btn text-center" data-ng-if="!mydata.userData.token">
-            <span data-my-translation="signup"></span>
-        </button>
-        <button type="submit" class="btn text-center" data-ng-if="mydata.userData.token">
-            <span data-my-translation="submit"></span>
-        </button>
+        <div data-ng-show="!mydata.formState.success">
+            <button type="submit" class="btn text-center" data-ng-if="!mydata.userData.token">
+                <span data-my-translation="signup"></span>
+            </button>
+            <button type="submit" class="btn text-center" data-ng-if="mydata.userData.token">
+                <span data-my-translation="submit"></span>
+            </button>
+        </div>
     </form>
 </div>

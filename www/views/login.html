@@ -4,7 +4,7 @@
     </a>
 </div>
 <div class="container">
-    <div class="error" data-ng-if="login.error">
+    <div class="error" data-ng-if="login.formState.error">
         <span data-my-translation="error_login"></span>
     </div>
     <form name="login.loginForm" data-ng-submit="login.submit()" novalidate>
@@ -14,7 +14,7 @@
                     name="username"
                     data-ng-model="login.userData.username"
                     required>
-            <div class="error" data-ng-if="login.submitted && !login.loginForm.username.$valid">
+            <div class="error" data-ng-if="login.formState.submitted && !login.loginForm.username.$valid">
                 <span data-my-translation="error_username"></span>
             </div>
         </div>
@@ -24,11 +24,11 @@
                    name="password"
                    data-ng-model="login.userData.password"
                    required>
-            <div class="error" data-ng-if="login.submitted && !login.loginForm.password.$valid">
+            <div class="error" data-ng-if="login.formState.submitted && !login.loginForm.password.$valid">
                 <span data-my-translation="error_password"></span>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-ng-if="!login.formState.success">
             <button type="submit" class="btn text-center">
                 <span data-my-translation="login"></span>
             </button>

@@ -14,6 +14,7 @@ var PositionService = (function () {
 
 		// DI
 		this.positionsData = positionsData;
+		console.log('positionsData: ', positionsData);
 		// local vars
 		this.chosenPosition = localStorage.getItem('tandemApp_position') ? JSON.parse(localStorage.getItem('tandemApp_position')) : this.positionsData[2]; //Berlin
 	}

@@ -20,8 +20,10 @@ var LoginController = (function () {
 		this.$location = $location;
 		// local vars
 		this.loginForm = {};
-		this.submitted = false;
-		this.error = false;
+		this.formState = {
+			submitted: false,
+			error: false
+		};
 		this.userData = {
 			username: '',
 			password: ''
@@ -41,18 +43,20 @@ var LoginController = (function () {
 				username: window.GibberishAES.enc(this.userData.username, this.encKey),
 				password: window.GibberishAES.enc(this.userData.password, this.encKey)
 			};
-			this.submitted = true;
-			if (this.userData.username.toString().length > 0 && this.userData.password.toString().length > 0) {
+			this.formState.submitted = true;
+
+			if (this.loginForm.$valid) {
 				this.DataService.postLogin(postData).then(function (data) {
-					console.log('success !!! ', data);
-					var userData = data.data;
-					console.log('userData : ', userData);
-					userData.email = _this.userData.username;
-					localStorage.setItem('tandemApp_userData', JSON.stringify(userData));
-					_this.$location.path('/settings');
+					if (data.data.toString() !== 'false') {
+						var userData = data.data;
+						userData.email = _this.userData.username;
+						localStorage.setItem('tandemApp_userData', JSON.stringify(userData));
+						_this.$location.path('/settings');
+					} else {
+						_this.formState.error = true;
+					}
 				}, function () {
-					console.log('error !!! ');
-					_this.error = true;
+					_this.formState.error = true;
 				});
 			}
 		}

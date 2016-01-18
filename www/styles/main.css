@@ -372,6 +372,18 @@ select {
   margin: 15px; }
 
 /**
+ * success
+ */
+.success {
+  background-color: #14cd00;
+  display: block;
+  overflow: auto; }
+  .success span {
+    padding: 5px;
+    color: #FFF;
+    display: block; }
+
+/**
  * error
  */
 .error {

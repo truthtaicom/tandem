@@ -19,6 +19,12 @@ class SettingsController {
 		//reload app
 		window.location.reload();
     }
+	logout () {
+		localStorage.removeItem('tandemApp_userData');
+		this.token = null;
+		//reload app
+		window.location.reload();
+	}
 }
 
 SettingsController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];

@@ -16,6 +16,12 @@
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>
+    <div class="row" data-ng-if="settings.token">
+        <a class="btn" href="" data-ng-click="settings.logout()">
+            <span data-my-translation="logout"></span>
+            <span class="pull-right icon-pfeil-more"></span>
+        </a>
+    </div>
     <div class="row">
         <a class="btn" href="#/data">
             <span data-my-translation="my_data"></span>

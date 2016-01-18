@@ -27,6 +27,11 @@ class DataService {
 			'change' +
 			'?time=' + new Date().getTime(), data);
 	}
+	postRegistration (data) {
+		return this.$http.post(this.restApiUrl +
+			'register' +
+			'?time=' + new Date().getTime(), data);
+	}
 
 }
 

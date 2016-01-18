@@ -156,6 +156,20 @@ select {
 }
 
 /**
+ * success
+ */
+.success {
+  background-color: $color-green;
+  display: block;
+  overflow: auto;
+  span {
+    padding: 5px;
+    color: $color-white;
+    display: block;
+  }
+}
+
+/**
  * error
  */
 .error {

@@ -20,11 +20,14 @@ window.tandemAppConfig.translation.de = {
 	"my_profile" : "Mein Gesuch",
 	"datenschutz" : "Datenschutz",
 	"impressum" : "Impressum",
-	"login" : "Anmelden",
-	"signup" : "Eintragen",
+	"login" : "Einloggen",
+	"logout" : "Ausloggen",
+	"signup" : "Anmelden",
 	"submit" : "Absenden",
 	"password" : "Passwort",
 	"forgot_password" : "Passwort vergessen",
+	"success_change" : "Die Änderung war erfolgreich",
+	"success_registration" : "Die Registrierung war erfolgreich",
 	"error" : "Fehler",
 	"error_login" : "Ein Fehler beim Login trat auf",
 	"error_username" : "Der Benutzername fehlt",
@@ -33,5 +36,7 @@ window.tandemAppConfig.translation.de = {
 	"error_email" : "Bitte gib eine Email-Adresse ein",
 	"error_zip" : "Bitte gib eine Postleitzahl ein",
 	"error_city" : "Bitte gib eine Stadt ein",
-	"error_description" : "Bitte gib eine Selbstbeschreibung ein"
+	"error_description" : "Bitte gib eine Selbstbeschreibung ein",
+	"error_change" : "Die Änderung konnte nicht gespeichert werden",
+	"error_registration" : "Ein Fehler bei der Registrierung trat auf"
 };
