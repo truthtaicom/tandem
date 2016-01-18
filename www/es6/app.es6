@@ -7,7 +7,7 @@ import { MainController } from './controller/main-controller';
 import { SearchController } from './controller/search-controller';
 import { SettingsController } from './controller/settings-controller';
 import { MyDataController } from './controller/my-data-controller';
-import { MyProfileController } from './controller/my-profile-controller';
+import { LoginController } from './controller/login-controller';
 import { AlertController } from './controller/alert-controller';
 import { FooterController } from './controller/footer-controller';
 
@@ -43,12 +43,12 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
 			.when('/data', {
 				templateUrl: 'views/my-data.html',
 				controller: 'MyDataController',
-				controllerAs: 'data'
+				controllerAs: 'mydata'
 			})
-			.when('/profile', {
-				templateUrl: 'views/my-profile.html',
-				controller: 'MyProfileController',
-				controllerAs: 'profile'
+			.when('/login', {
+				templateUrl: 'views/login.html',
+				controller: 'LoginController',
+				controllerAs: 'login'
 			})
 			.when('/impressum', {
 				templateUrl: 'views/impressum.html'
@@ -65,6 +65,7 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
         {id: 'de', name: 'Deutsch'},
         {id: 'en', name: 'English'}
     ])
+	.constant('encKey', '2343desdfsf!"§$ffds44')
     .constant('defaultDistance', 10)
     .constant('maxDistance', 100)
     .constant('svgIcon',
@@ -80,7 +81,7 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
     .controller('SearchController', SearchController)
     .controller('SettingsController', SettingsController)
 	.controller('MyDataController', MyDataController)
-	.controller('MyProfileController', MyProfileController)
+	.controller('LoginController', LoginController)
     .controller('AlertController', AlertController)
     .controller('FooterController', FooterController)
     .service('ActivitiesService', ActivitiesService)

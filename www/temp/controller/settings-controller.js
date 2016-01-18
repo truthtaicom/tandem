@@ -22,12 +22,13 @@ var SettingsController = (function () {
             availableOptions: this.languageSettings,
             selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
         };
+        this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
     }
 
     _createClass(SettingsController, [{
         key: 'changeLanguage',
-        value: function changeLanguage() {
-            this.language = this.data.selectedOption.id;
+        value: function changeLanguage(id) {
+            this.language = id;
             this.LanguageService.resetLanguage(this.language);
             //reload app
             window.location.reload();

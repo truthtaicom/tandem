@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'scooped';
-  src:    url('fonts/scooped.eot?9d9sfl');
-  src:    url('fonts/scooped.eot?9d9sfl#iefix') format('embedded-opentype'),
-  url('fonts/scooped.ttf?9d9sfl') format('truetype'),
-  url('fonts/scooped.woff?9d9sfl') format('woff'),
-  url('fonts/scooped.svg?9d9sfl#scooped') format('svg');
+  src:    url('fonts/scooped.eot?o65uhm');
+  src:    url('fonts/scooped.eot?o65uhm#iefix') format('embedded-opentype'),
+  url('fonts/scooped.ttf?o65uhm') format('truetype'),
+  url('fonts/scooped.woff?o65uhm') format('woff'),
+  url('fonts/scooped.svg?o65uhm#scooped') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -35,6 +35,12 @@
 }
 .icon-target:before {
   content: "\e60c";
+}
+.icon-close:before {
+  content: "\e607";
+}
+.icon-checkmark:before {
+  content: "\e606";
 }
 .icon-pfeil-more:before {
   content: "\e60b";

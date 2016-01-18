@@ -13,7 +13,7 @@ var _settingsController = require('./controller/settings-controller');
 
 var _myDataController = require('./controller/my-data-controller');
 
-var _myProfileController = require('./controller/my-profile-controller');
+var _loginController = require('./controller/login-controller');
 
 var _alertController = require('./controller/alert-controller');
 
@@ -54,11 +54,11 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider']).config(['$ro
     }).when('/data', {
         templateUrl: 'views/my-data.html',
         controller: 'MyDataController',
-        controllerAs: 'data'
-    }).when('/profile', {
-        templateUrl: 'views/my-profile.html',
-        controller: 'MyProfileController',
-        controllerAs: 'profile'
+        controllerAs: 'mydata'
+    }).when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginController',
+        controllerAs: 'login'
     }).when('/impressum', {
         templateUrl: 'views/impressum.html'
     }).when('/datenschutz', {
@@ -66,12 +66,12 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider']).config(['$ro
     }).otherwise({
         redirectTo: '/'
     });
-}]).constant('restApiUrl', 'http://localhost/cafelingo/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('MyDataController', _myDataController.MyDataController).controller('MyProfileController', _myProfileController.MyProfileController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory);
+}]).constant('restApiUrl', 'http://localhost/cafelingo/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('encKey', '2343desdfsf!"§$ffds44').constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('MyDataController', _myDataController.MyDataController).controller('LoginController', _loginController.LoginController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory);
 
 // directives
 
 
-},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/main-controller":4,"./controller/my-data-controller":5,"./controller/my-profile-controller":6,"./controller/search-controller":7,"./controller/settings-controller":8,"./data/activities/activities":9,"./data/positions/de":10,"./directives/translation-directive":11,"./services/activities-service":12,"./services/alert-service":13,"./services/data-service":14,"./services/filter-service":15,"./services/language-service":16,"./services/position-service":17}],2:[function(require,module,exports){
+},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/login-controller":4,"./controller/main-controller":5,"./controller/my-data-controller":6,"./controller/search-controller":7,"./controller/settings-controller":8,"./data/activities/activities":9,"./data/positions/de":10,"./directives/translation-directive":11,"./services/activities-service":12,"./services/alert-service":13,"./services/data-service":14,"./services/filter-service":15,"./services/language-service":16,"./services/position-service":17}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -130,6 +130,75 @@ exports.FooterController = FooterController;
 
 
 },{}],4:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LoginController = (function () {
+	function LoginController(languageSettings, LanguageService, $location, DataService, encKey) {
+		_classCallCheck(this, LoginController);
+
+		// DI
+		this.languageSettings = languageSettings;
+		this.LanguageService = LanguageService;
+		this.DataService = DataService;
+		this.encKey = encKey;
+		this.$location = $location;
+		// local vars
+		this.loginForm = {};
+		this.submitted = false;
+		this.error = false;
+		this.userData = {
+			username: '',
+			password: ''
+		};
+		this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
+		if (this.token) {
+			this.$location.path('/settings');
+		}
+	}
+
+	_createClass(LoginController, [{
+		key: 'submit',
+		value: function submit() {
+			var _this = this;
+
+			var postData = {
+				username: window.GibberishAES.enc(this.userData.username, this.encKey),
+				password: window.GibberishAES.enc(this.userData.password, this.encKey)
+			};
+			this.submitted = true;
+			if (this.userData.username.toString().length > 0 && this.userData.password.toString().length > 0) {
+				this.DataService.postLogin(postData).then(function (data) {
+					console.log('success !!! ', data);
+					var userData = data.data;
+					console.log('userData : ', userData);
+					userData.email = _this.userData.username;
+					localStorage.setItem('tandemApp_userData', JSON.stringify(userData));
+					_this.$location.path('/settings');
+				}, function () {
+					console.log('error !!! ');
+					_this.error = true;
+				});
+			}
+		}
+	}]);
+
+	return LoginController;
+})();
+
+LoginController.$inject = ['languageSettings', 'LanguageService', '$location', 'DataService', 'encKey'];
+
+exports.LoginController = LoginController;
+
+
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -214,62 +283,76 @@ MainController.$inject = ['$rootScope', '$timeout', 'ActivitiesService', 'Langua
 exports.MainController = MainController;
 
 
-},{}],5:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MyDataController = function MyDataController(languageSettings, LanguageService, ActivitiesService) {
-	_classCallCheck(this, MyDataController);
-
-	// DI
-	this.languageSettings = languageSettings;
-	this.LanguageService = LanguageService;
-	this.ActivitiesService = ActivitiesService;
-	// local vars
-	this.userData = localStorage.getItem('tandemApp_userData') ? localStorage.getItem('tandemApp_userData') : {
-		name: 'Hans',
-		email: '',
-		zip: '',
-		city: '',
-		description: '',
-		lang_have: this.ActivitiesService.offerId,
-		lang_seek: this.ActivitiesService.searchId
-	};
-	this.language = this.LanguageService.selectedLanguage;
-};
-
-MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
-
-exports.MyDataController = MyDataController;
-
-
 },{}],6:[function(require,module,exports){
 'use strict';
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var MyProfileController = function MyProfileController(languageSettings, LanguageService, ActivitiesService) {
-	_classCallCheck(this, MyProfileController);
+var MyDataController = (function () {
+	function MyDataController(languageSettings, LanguageService, ActivitiesService, DataService) {
+		_classCallCheck(this, MyDataController);
 
-	// DI
-	this.languageSettings = languageSettings;
-	this.LanguageService = LanguageService;
-	this.ActivitiesService = ActivitiesService;
-	this.language = this.LanguageService.selectedLanguage;
-};
+		// DI
+		this.languageSettings = languageSettings;
+		this.LanguageService = LanguageService;
+		this.ActivitiesService = ActivitiesService;
+		this.DataService = DataService;
+		// local vars
+		this.myDataForm = {};
+		this.submitted = false;
+		this.userData = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')) : {
+			name: '',
+			email: '',
+			zip: '',
+			city: '',
+			description: '',
+			lang_have: this.ActivitiesService.offerId,
+			lang_seek: this.ActivitiesService.searchId
+		};
+		this.language = this.LanguageService.selectedLanguage;
+		this.activities = this.ActivitiesService.activities;
+		this.offerObj = this.ActivitiesService.offerObj;
+		this.searchObj = this.ActivitiesService.searchObj;
+	}
 
-MyProfileController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
+	_createClass(MyDataController, [{
+		key: 'changeOffer',
+		value: function changeOffer() {
+			this.ActivitiesService.offerId = this.offerObj.id;
+			this.ActivitiesService.update();
+		}
+	}, {
+		key: 'changeSearch',
+		value: function changeSearch() {
+			this.ActivitiesService.searchId = this.searchObj.id;
+			this.ActivitiesService.update();
+		}
+	}, {
+		key: 'submitForm',
+		value: function submitForm() {
+			console.log('submitForm');
+			this.submitted = true;
+			//console.log('this.userData : ', this.userData);
+			this.DataService.postChange(this.userData).then(function () {
+				console.log('SUCCESS');
+			}, function () {
+				console.log('ERROR');
+			});
+		}
+	}]);
 
-exports.MyProfileController = MyProfileController;
+	return MyDataController;
+})();
+
+MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService'];
+
+exports.MyDataController = MyDataController;
 
 
 },{}],7:[function(require,module,exports){
@@ -575,12 +658,13 @@ var SettingsController = (function () {
             availableOptions: this.languageSettings,
             selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
         };
+        this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
     }
 
     _createClass(SettingsController, [{
         key: 'changeLanguage',
-        value: function changeLanguage() {
-            this.language = this.data.selectedOption.id;
+        value: function changeLanguage(id) {
+            this.language = id;
             this.LanguageService.resetLanguage(this.language);
             //reload app
             window.location.reload();
@@ -1379,31 +1463,41 @@ exports.AlertService = AlertService;
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var DataService = (function () {
-    function DataService($http, restApiUrl, ActivitiesService, PositionService, maxDistance) {
-        _classCallCheck(this, DataService);
+	function DataService($http, restApiUrl, ActivitiesService, PositionService, maxDistance) {
+		_classCallCheck(this, DataService);
 
-        // DI
-        this.$http = $http;
-        this.restApiUrl = restApiUrl;
-        this.ActivitiesService = ActivitiesService;
-        this.PositionService = PositionService;
-        this.maxDistance = maxDistance;
-    }
+		// DI
+		this.$http = $http;
+		this.restApiUrl = restApiUrl;
+		this.ActivitiesService = ActivitiesService;
+		this.PositionService = PositionService;
+		this.maxDistance = maxDistance;
+	}
 
-    _createClass(DataService, [{
-        key: 'getResults',
-        value: function getResults() {
-            return this.$http.get(this.restApiUrl + 'retrieve_active' + '?lat=' + this.PositionService.chosenPosition.latitude + '&lon=' + this.PositionService.chosenPosition.longitude + '&max=' + this.maxDistance + '&offer_id=' + this.ActivitiesService.offerId + '&search_id=' + this.ActivitiesService.searchId + '&time=' + new Date().getTime());
-        }
-    }]);
+	_createClass(DataService, [{
+		key: 'getResults',
+		value: function getResults() {
+			return this.$http.get(this.restApiUrl + 'retrieve_active' + '?lat=' + this.PositionService.chosenPosition.latitude + '&lon=' + this.PositionService.chosenPosition.longitude + '&max=' + this.maxDistance + '&offer_id=' + this.ActivitiesService.offerId + '&search_id=' + this.ActivitiesService.searchId + '&time=' + new Date().getTime());
+		}
+	}, {
+		key: 'postLogin',
+		value: function postLogin(data) {
+			return this.$http.post(this.restApiUrl + 'login' + '?time=' + new Date().getTime(), data);
+		}
+	}, {
+		key: 'postChange',
+		value: function postChange(data) {
+			return this.$http.post(this.restApiUrl + 'change' + '?time=' + new Date().getTime(), data);
+		}
+	}]);
 
-    return DataService;
+	return DataService;
 })();
 
 DataService.$inject = ['$http', 'restApiUrl', 'ActivitiesService', 'PositionService', 'maxDistance'];

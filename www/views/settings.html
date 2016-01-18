@@ -1,21 +1,24 @@
 <div class="container">
-    <div class="row">
-        <span class="label" data-my-translation="language"></span>
-        <select
-        data-ng-options="option.name for option in settings.data.availableOptions track by option.id"
-        data-ng-model="settings.data.selectedOption"
-        data-ng-change="settings.changeLanguage()">
-        </select>
+    <div class="row switch">
+
+        <div class="g50 text-center" data-ng-class="{'active' : settings.language==='en'}" data-ng-click="settings.changeLanguage(settings.data.availableOptions[0].id)">
+            <span data-ng-bind="settings.data.availableOptions[0].name"></span>
+            <span data-ng-show="settings.language==='de'" class="icon-checkmark"></span>
+        </div>
+        <div class="g50 text-center" data-ng-class="{'active' : settings.language==='de'}" data-ng-click="settings.changeLanguage(settings.data.availableOptions[1].id)">
+            <span data-ng-bind="settings.data.availableOptions[1].name">English</span>
+            <span data-ng-show="settings.language==='en'" class="icon-checkmark"></span>
+        </div>
     </div>
-    <div class="row">
-        <a class="btn" href="#/data">
-            <span data-my-translation="my_data"></span>
+    <div class="row" data-ng-if="!settings.token">
+        <a class="btn" href="#/login">
+            <span data-my-translation="login"></span>
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>
     <div class="row">
-        <a class="btn" href="#/profile">
-            <span data-my-translation="my_profile"></span>
+        <a class="btn" href="#/data">
+            <span data-my-translation="my_data"></span>
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>
@@ -31,6 +34,4 @@
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>
-
-
 </div>

@@ -17,6 +17,16 @@ class DataService {
 			'&search_id=' + this.ActivitiesService.searchId +
 			'&time=' + new Date().getTime());
     }
+	postLogin (data) {
+		return this.$http.post(this.restApiUrl +
+			'login' +
+			'?time=' + new Date().getTime(), data);
+	}
+	postChange (data) {
+		return this.$http.post(this.restApiUrl +
+			'change' +
+			'?time=' + new Date().getTime(), data);
+	}
 
 }
 

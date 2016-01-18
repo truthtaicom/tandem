@@ -8,11 +8,13 @@ class SettingsController {
 		this.language = this.LanguageService.selectedLanguage;
         this.data = {
             availableOptions: this.languageSettings,
-            selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1],
+            selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
 		};
-    }
-    changeLanguage () {
-        this.language = this.data.selectedOption.id;
+		this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
+
+	}
+    changeLanguage (id) {
+        this.language = id;
         this.LanguageService.resetLanguage(this.language);
 		//reload app
 		window.location.reload();
