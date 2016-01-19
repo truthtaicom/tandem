@@ -6,14 +6,17 @@ describe('Controller: MainController', function () {
     beforeEach(module('tandemApp'));
 
     var MainController,
+        timeout,
         scope;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope) {
+    beforeEach(inject(function ($controller, $rootScope, $timeout) {
         scope = $rootScope.$new();
+        timeout = $timeout;
         MainController = $controller('MainController', {
             $scope: scope
         });
+        localStorage.removeItem('tandemApp_position');
 		window.tandemAppConfig = {};
 		window.tandemAppConfig.geoLocation = function(){
 			return true;
@@ -63,6 +66,40 @@ describe('Controller: MainController', function () {
 
     it('should have a property offerObj; id to be 36', inject(function () {
         expect(MainController.offerObj.id).toBe(36);
+    }));
+
+    it('should have a showAlert method', inject(function () {
+        expect(MainController.showAlert).toBeDefined();
+    }));
+
+    it('should have a showAlert method, updatePosition to have been called', inject(function () {
+        spyOn(MainController.PositionService, 'updatePosition');
+        MainController.showAlert();
+        expect(MainController.PositionService.updatePosition).toHaveBeenCalled();
+    }));
+
+    it('should have a showAlert method, longitude = null; AlertService.alerts.retrieving_position = true', inject(function () {
+        MainController.chosenPosition.longitude = null;
+        MainController.showAlert();
+        expect(MainController.AlertService.alerts.retrieving_position).toBe(true);
+        MainController.chosenPosition.longitude = 13.413;
+    }));
+
+    it('should have a showAlert method, longitude = null; $broadcast to have been called', inject(function () {
+        spyOn(MainController.$rootScope, '$broadcast');
+        MainController.chosenPosition.longitude = null;
+        MainController.showAlert();
+        expect(MainController.$rootScope.$broadcast).toHaveBeenCalled();
+        MainController.chosenPosition.longitude = 13.413;
+    }));
+
+    it('should have a showAlert method, longitude = null; showAlert to have been called after timeout!', inject(function () {
+        MainController.chosenPosition.longitude = null;
+        MainController.showAlert();
+        spyOn(MainController, 'showAlert');
+        timeout.flush();
+        expect(MainController.showAlert).toHaveBeenCalled();
+        MainController.chosenPosition.longitude = 13.413;
     }));
 
     it('should have a changeActivity method', inject(function () {
@@ -126,15 +163,15 @@ describe('Controller: MainController', function () {
     it('should set window.longitude and window.latitude after calling window.tandemAppConfig.geoLocation()', inject(function () {
         MainController.chosenPosition = MainController.positions[1];
         MainController.changePosition();
-        expect(MainController.chosenPosition.latitude).toBe('50.783');
-        expect(MainController.chosenPosition.longitude).toBe('6.083');
+        expect(MainController.chosenPosition.latitude).toBe(50.783);
+        expect(MainController.chosenPosition.longitude).toBe(6.083);
     }));
 
-    it('should call $rootScope.$broadcast', inject(function () {
-        spyOn(MainController.$rootScope, '$broadcast');
-        window.longitude = null;
-        MainController.changePosition();
-        expect(MainController.$rootScope.$broadcast).toHaveBeenCalled();
-    }));
+    //it('should call $rootScope.$broadcast', inject(function () {
+    //    spyOn(MainController.$rootScope, '$broadcast');
+    //    window.longitude = null;
+    //    MainController.changePosition();
+    //    expect(MainController.$rootScope.$broadcast).toHaveBeenCalled();
+    //}));
 
 });

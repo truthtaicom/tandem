@@ -48,12 +48,21 @@ describe('Controller: SettingsController', function () {
         expect(SettingsController.data.selectedOption).toBe(SettingsController.languageSettings[1]);
     }));
 
-
-    it('should call $rootScope.$broadcast', inject(function () {
-        spyOn(SettingsController.$rootScope, '$broadcast');
-        SettingsController.changeLanguage();
-        expect(SettingsController.$rootScope.$broadcast).toHaveBeenCalled();
+    it('should have a property token', inject(function () {
+        expect(SettingsController.token).toBeDefined();
     }));
 
+    it('should reset SettingsController.language when calling function changeLanguage with "en" ', inject(function () {
+        SettingsController.changeLanguage('en');
+        expect(SettingsController.language).toBe('en');
+    }));
 
+    it('should have a method "logout"', inject(function () {
+        expect(SettingsController.logout).toBeDefined();
+    }));
+
+    it('should reset token to null after calling method "logout"', inject(function () {
+        SettingsController.logout();
+        expect(SettingsController.token).toBe(null);
+    }));
 });

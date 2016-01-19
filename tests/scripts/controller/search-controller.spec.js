@@ -21,9 +21,12 @@ describe('Controller: SearchController', function () {
 		deferred = q.defer({});
 		window.innerHeight = 210;
 		window.innerWidth = 100;
+		window.latitude = null;
+		window.longitude = null;
 		localStorage.removeItem('tandemApp_lastSearch_maxDistance');
 		localStorage.removeItem('tandemApp_lastSearch_latitude');
 		localStorage.removeItem('tandemApp_lastSearch_longitude');
+		localStorage.removeItem('tandemApp_position');
 		dataService = {
 			getResults : function(){
 				return deferred.promise;
@@ -124,11 +127,11 @@ describe('Controller: SearchController', function () {
 	}));
 
 	it('should have a property PositionService.chosenPosition.latitude', inject(function () {
-		expect(SearchController.PositionService.chosenPosition.latitude).toBe('50.783');
+		expect(SearchController.PositionService.chosenPosition.latitude).toBe(52.523);
 	}));
 
 	it('should have a property PositionService.chosenPosition.longitude', inject(function () {
-		expect(SearchController.PositionService.chosenPosition.longitude).toBe('6.083');
+		expect(SearchController.PositionService.chosenPosition.longitude).toBe(13.413);
 	}));
 
 	it('should have a property AlertService.alerts.retrieving_searchresults to be true', inject(function () {
@@ -246,8 +249,6 @@ describe('Controller: SearchController', function () {
 	it('should have a method drawUsers; searchResults to now contain property x', inject(function () {
 		SearchController.searchResults = fakeData.data;
 		var userResult = SearchController.drawUsers();
-		console.log('userResult ? ', userResult);
-		console.log('SearchController.searchResults[0] : ',SearchController.searchResults[0]);
 		setTimeout(function(){
 			expect(SearchController.searchResults[0].x).toBeDefined();
 		},500);
@@ -256,8 +257,6 @@ describe('Controller: SearchController', function () {
 	it('should have a method drawUsers; searchResults to now contain property y', inject(function () {
 		SearchController.searchResults = fakeData.data;
 		var userResult = SearchController.drawUsers();
-		console.log('userResult ? ', userResult);
-		console.log('SearchController.searchResults[0] : ',SearchController.searchResults[0]);
 		setTimeout(function(){
 			expect(SearchController.searchResults[0].y).toBeDefined();
 		},500);

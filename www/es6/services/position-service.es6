@@ -6,10 +6,9 @@ class PositionService {
         this.chosenPosition = localStorage.getItem('tandemApp_position') ? JSON.parse(localStorage.getItem('tandemApp_position')) : this.positionsData[2]; //Berlin
 	}
 	updatePosition () {
-		console.log('...', this.chosenPosition);
 		if (parseInt(this.chosenPosition.id) === 0) {
-			this.chosenPosition.latitude = typeof window.latitude !== 'undefined' ? window.latitude : null;
-			this.chosenPosition.longitude = typeof window.longitude !== 'undefined' ? window.longitude : null;
+			this.chosenPosition.latitude = typeof window.latitude !== 'undefined' && window.latitude ? window.latitude : null;
+			this.chosenPosition.longitude = typeof window.longitude !== 'undefined' && window.longitude ? window.longitude : null;
 		}
 	}
     update (posObj) {

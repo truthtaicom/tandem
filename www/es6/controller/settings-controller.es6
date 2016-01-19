@@ -16,14 +16,14 @@ class SettingsController {
     changeLanguage (id) {
         this.language = id;
         this.LanguageService.resetLanguage(this.language);
-		//reload app
-		window.location.reload();
+        //TODO : reload app
+        //window.location.reload();
     }
 	logout () {
 		localStorage.removeItem('tandemApp_userData');
 		this.token = null;
-		//reload app
-		window.location.reload();
+		//TODO : reload app
+		//window.location.reload();
 	}
 }
 

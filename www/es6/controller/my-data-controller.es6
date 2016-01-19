@@ -35,7 +35,6 @@ class MyDataController {
 		this.ActivitiesService.update();
 	}
 	submitForm () {
-		console.log('submitForm');
 		this.formState.submitted = true;
 		if (this.myDataForm.$valid) {
 		if (typeof this.userData.token !== 'undefined') {
@@ -44,7 +43,6 @@ class MyDataController {
 				 */
 				this.DataService.postChange(this.userData).then((data) => {
 					if (data.data.toString() === 'true') {
-						console.log('SUCCESS');
 						localStorage.setItem('tandemApp_userData', JSON.stringify(this.userData));
 						this.formState.success = true;
 						this.formState.error = false;
@@ -64,9 +62,9 @@ class MyDataController {
 				this.userData.lon = typeof window.longitude !== 'undefined' ? window.longitude : 0;
 				this.userData.lang_used = this.language;
 				this.DataService.postRegistration(this.userData).then((data) => {
-					console.log('data : ', data.data.token);
 					if (typeof data.data.token !== 'undefined') {
-						localStorage.setItem('tandemApp_userData', JSON.stringify(data.data));
+						this.userData = data.data;
+						localStorage.setItem('tandemApp_userData', JSON.stringify(this.userData));
 						this.formState.success = true;
 						this.formState.error = false;
 					} else {
