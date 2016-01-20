@@ -27,25 +27,26 @@ class SearchController {
 			this.AlertService.alerts.retrieving_searchresults = false;
 			$location.path('/');
 		} else if (
-			(parseInt(this.ActivitiesService.offerObj.id) === parseInt(localStorage.getItem('tandemApp_activities_offerId'))) &&
-			(parseInt(this.ActivitiesService.searchObj.id) === parseInt(localStorage.getItem('tandemApp_activities_searchId'))) &&
-			(parseInt(this.maxDistance) === parseInt(localStorage.getItem('tandemApp_lastSearch_maxDistance'))) &&
+			(parseInt(localStorage.getItem('tandemApp_lastSearch_offerId')) === parseInt(localStorage.getItem('tandemApp_activities_offerId'))) &&
+			(parseInt(localStorage.getItem('tandemApp_lastSearch_searchId')) === parseInt(localStorage.getItem('tandemApp_activities_searchId'))) &&
 			(this.PositionService.chosenPosition.longitude.toString() === localStorage.getItem('tandemApp_lastSearch_longitude')) &&
-			(this.PositionService.chosenPosition.latitude.toString() === localStorage.getItem('tandemApp_lastSearch_latitude'))
+			(this.PositionService.chosenPosition.latitude.toString() === localStorage.getItem('tandemApp_lastSearch_latitude')) &&
+			(localStorage.getItem('tandemApp_lastSearch_results')) // actually have the result
 		) {
 			this.searchResults = JSON.parse(localStorage.getItem('tandemApp_lastSearch_results'));
-			this.drawUsers(true);
+			this.drawUsers();
 		} else {
 			this.AlertService.alerts.retrieving_searchresults = true;
 			DataService.getResults().then((data) => {
-				localStorage.setItem('tandemApp_lastSearch_maxDistance', this.maxDistance);
-				localStorage.setItem('tandemApp_lastSearch_latitude', this.PositionService.chosenPosition.latitude);
-				localStorage.setItem('tandemApp_lastSearch_longitude', this.PositionService.chosenPosition.longitude);
 				this.AlertService.alerts.retrieving_searchresults = false;
 				this.$rootScope.$broadcast('show-alert');
 				if (data && data.data.length > 0) {
 					let randomize = this.randomizeResults();
 					this.searchResults = randomize(data.data);
+					localStorage.setItem('tandemApp_lastSearch_offerId', this.ActivitiesService.offerObj.id);
+					localStorage.setItem('tandemApp_lastSearch_searchId', this.ActivitiesService.searchObj.id);
+					localStorage.setItem('tandemApp_lastSearch_latitude', this.PositionService.chosenPosition.latitude);
+					localStorage.setItem('tandemApp_lastSearch_longitude', this.PositionService.chosenPosition.longitude);
 					localStorage.setItem('tandemApp_lastSearch_results', JSON.stringify(this.searchResults));
 					this.drawUsers();
 				}
@@ -167,7 +168,8 @@ class SearchController {
 						((parseInt(this.searchResults[i].y) + parseInt(this.svgWidth)) >= (thisY - 60) && this.searchResults[i].y <= thisY - 60)
 					) {
 						//currentProfileIndex=i;
-						console.log('User ', i);
+						console.log('User ', i, ' searchResults : ', this.searchResults[i]);
+
 					}
 				}
 
@@ -178,56 +180,48 @@ class SearchController {
 			return false;
 		}
 	}
-	drawUsers (hasReturned) {
+	drawUsers () {
 		var done = false;
 		for (let resultArrayCounter = 0; resultArrayCounter < this.searchResults.length; resultArrayCounter++) {
+			var newX,
+				newY,
+				forX = ((this.maxDistance / parseInt(this.selectedDistance, 10)) * this.searchResults[resultArrayCounter].percentX),
+				forY = ((this.maxDistance / parseInt(this.selectedDistance, 10)) * this.searchResults[resultArrayCounter].percentY),
+				offsetX = forX, // (forX * 100) / (width / 2), //apply the percent to half the width (x)
+				offsetY = forY, //(forY * 100) / (height / 2), //apply the percent to half the height (x)
+				randomDirection = this.searchResults[resultArrayCounter].randomDirection;
 			/*
-			 * hasReturned === true ; if the data is already existing
-			 * hasReturned === false; if the data needs to be set
+			 * show only results with 100% or less (if magnified)
 			 */
-			if (!hasReturned) {
-				var newX,
-					newY,
-					forX = ((this.maxDistance / parseInt(this.selectedDistance, 10)) * this.searchResults[resultArrayCounter].percentX),
-					forY = ((this.maxDistance / parseInt(this.selectedDistance, 10)) * this.searchResults[resultArrayCounter].percentY),
-					offsetX = forX, // (forX * 100) / (width / 2), //apply the percent to half the width (x)
-					offsetY = forY, //(forY * 100) / (height / 2), //apply the percent to half the height (x)
-					randomDirection = this.searchResults[resultArrayCounter].randomDirection;
-				/*
-				 * show only results with 100% or less (if magnified)
-				 */
-				if (parseInt(offsetX / 2, 10) <= 100 && parseInt(offsetY / 2, 10) <= 100) {
-					switch (randomDirection) {
-						case 1:
-							newX = parseInt(this.centerX + offsetX, 10);
-							newY = parseInt(this.centerY + offsetY, 10);
-							break;
-						case 2:
-							newX = parseInt(this.centerX - offsetX, 10);
-							newY = parseInt(this.centerY - offsetY, 10);
-							break;
-						case 3:
-							newX = parseInt(this.centerX + offsetX, 10);
-							newY = parseInt(this.centerY - offsetY, 10);
-							break;
-						case 4:
-							newX = parseInt(this.centerX - offsetX, 10);
-							newY = parseInt(this.centerY + offsetY, 10);
-							break;
-						default:
-							newX = parseInt(this.centerX + 0, 10);
-							newY = parseInt(this.centerY + 0, 10);
-							break;
-					}
-					/*
-					 * -> resultArray.push coordinates
-					 */
-					this.searchResults[resultArrayCounter].x = newX;
-					this.searchResults[resultArrayCounter].y = newY;
-					this.drawImage(this.searchResults[resultArrayCounter].x, this.searchResults[resultArrayCounter].y);
+			if (parseInt(offsetX / 2, 10) <= 100 && parseInt(offsetY / 2, 10) <= 100) {
+				switch (randomDirection) {
+					case 1:
+						newX = parseInt(this.centerX + offsetX, 10);
+						newY = parseInt(this.centerY + offsetY, 10);
+						break;
+					case 2:
+						newX = parseInt(this.centerX - offsetX, 10);
+						newY = parseInt(this.centerY - offsetY, 10);
+						break;
+					case 3:
+						newX = parseInt(this.centerX + offsetX, 10);
+						newY = parseInt(this.centerY - offsetY, 10);
+						break;
+					case 4:
+						newX = parseInt(this.centerX - offsetX, 10);
+						newY = parseInt(this.centerY + offsetY, 10);
+						break;
+					default:
+						newX = parseInt(this.centerX + 0, 10);
+						newY = parseInt(this.centerY + 0, 10);
+						break;
 				}
-			} else {
-				this.drawImage(this.searchResults[resultArrayCounter].x, this.this.searchResults[resultArrayCounter].y);
+				/*
+				 * -> resultArray.push coordinates
+				 */
+				this.searchResults[resultArrayCounter].x = newX;
+				this.searchResults[resultArrayCounter].y = newY;
+				this.drawImage(this.searchResults[resultArrayCounter].x, this.searchResults[resultArrayCounter].y);
 			}
 			if (parseInt(resultArrayCounter) + 1 === this.searchResults.length) {
 				done = true;
