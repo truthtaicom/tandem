@@ -15,6 +15,9 @@ With gulp
 
 *Versions*
 
+Version 0.0.4
+- Contact a person
+
 Version 0.0.3
 - User Account
 
