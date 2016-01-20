@@ -115,20 +115,18 @@ describe('Controller: MyDataController', function () {
         expect(MyDataController.formState.error).toBe(false);
     }));
 
-    it('should have a property offerObj', inject(function () {
-        expect(MyDataController.offerObj).toBeDefined();
+    it('should have a method updateLangObjects', inject(function () {
+        expect(MyDataController.updateLangObjects).toBeDefined();
     }));
 
-    it('should have a property offerObj; id to be 36', inject(function () {
-        expect(MyDataController.offerObj.id).toBe(36);
+    it('should have a property lang_have; id to be 36', inject(function () {
+        MyDataController.updateLangObjects();
+        expect(MyDataController.lang_have.id).toBe(36);
     }));
 
-    it('should have a property searchObj', inject(function () {
-        expect(MyDataController.searchObj).toBeDefined();
-    }));
-
-    it('should have a property searchObj; id to be 36', inject(function () {
-        expect(MyDataController.searchObj.id).toBe(36);
+    it('should have a property lang_seek; id to be 36', inject(function () {
+        MyDataController.updateLangObjects();
+        expect(MyDataController.lang_seek.id).toBe(36);
     }));
 
     it('should have a property userData', inject(function () {
@@ -155,28 +153,12 @@ describe('Controller: MyDataController', function () {
         expect(MyDataController.userData.description).toBeDefined();
     }));
 
-    it('should have a property userData.lang_have', inject(function () {
-        expect(MyDataController.userData.lang_have).toBe(MyDataController.ActivitiesService.offerId);
+    it('should have a property userData.lang_have_id', inject(function () {
+        expect(MyDataController.userData.lang_have_id).toBe(MyDataController.ActivitiesService.offerId);
     }));
 
-    it('should have a property userData.lang_seek', inject(function () {
-        expect(MyDataController.userData.lang_seek).toBe(MyDataController.ActivitiesService.searchId);
-    }));
-
-    it('should have a method changeOffer', inject(function () {
-        expect(MyDataController.changeOffer).toBeDefined();
-    }));
-
-    it('should call ActivitiesService.update after calling changeOffer', inject(function () {
-        spyOn(MyDataController.ActivitiesService, 'update').andCallThrough();
-        MyDataController.changeOffer();
-        expect(MyDataController.ActivitiesService.update).toHaveBeenCalled();
-    }));
-
-    it('should call ActivitiesService.update after calling changeSearch', inject(function () {
-        spyOn(MyDataController.ActivitiesService, 'update').andCallThrough();
-        MyDataController.changeSearch();
-        expect(MyDataController.ActivitiesService.update).toHaveBeenCalled();
+    it('should have a property userData.lang_seek_id', inject(function () {
+        expect(MyDataController.userData.lang_seek_id).toBe(MyDataController.ActivitiesService.searchId);
     }));
 
     it('should have a method submitForm', inject(function () {

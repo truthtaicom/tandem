@@ -66,15 +66,13 @@
             <span class="label" data-my-translation="my_native_language"></span>
             <select name="offerSelect" id="offerSelect"
                     data-ng-options="option.name for option in mydata.activities track by option.id"
-                    data-ng-model="mydata.offerObj"
-                    data-ng-change="mydata.changeOffer()"></select>
+                    data-ng-model="mydata.lang_have"></select>
         </div>
         <div class="row">
             <span class="label" data-my-translation="my_sought_language"></span>
             <select name="searchSelect" id="searchSelect"
                     data-ng-options="option.name for option in mydata.activities track by option.id"
-                    data-ng-model="mydata.searchObj"
-                    data-ng-change="mydata.changeSearch()"></select>
+                    data-ng-model="mydata.lang_seek"></select>
         </div>
         <div data-ng-show="!mydata.formState.success">
             <button type="submit" class="btn text-center" data-ng-if="!mydata.userData.token">

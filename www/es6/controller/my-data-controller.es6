@@ -1,10 +1,11 @@
 class MyDataController {
-	constructor (languageSettings, LanguageService, ActivitiesService, DataService) {
+	constructor (languageSettings, LanguageService, ActivitiesService, DataService, FilterService) {
 		// DI
 		this.languageSettings = languageSettings;
 		this.LanguageService = LanguageService;
 		this.ActivitiesService = ActivitiesService;
 		this.DataService = DataService;
+		this.FilterService = FilterService;
 		// local vars
 		this.myDataForm = {};
 		this.formState = {
@@ -18,26 +19,32 @@ class MyDataController {
 			zip: '',
 			city: '',
 			description: '',
-			lang_have: this.ActivitiesService.offerId,
-			lang_seek: this.ActivitiesService.searchId
+			lang_have_id: this.ActivitiesService.offerId,
+			lang_seek_id: this.ActivitiesService.searchId
 		};
 		this.language = this.LanguageService.selectedLanguage;
 		this.activities = this.ActivitiesService.activities;
-		this.offerObj = this.ActivitiesService.offerObj;
-		this.searchObj = this.ActivitiesService.searchObj;
+		this.updateLangObjects();
 	}
-	changeOffer () {
-		this.ActivitiesService.offerId = this.offerObj.id;
-		this.ActivitiesService.update();
-	}
-	changeSearch () {
-		this.ActivitiesService.searchId = this.searchObj.id;
-		this.ActivitiesService.update();
+	updateLangObjects () {
+		this.lang_have = this.FilterService.filterObjectFromArray(this.activities, 'id', this.userData.lang_have_id);
+		this.lang_seek = this.FilterService.filterObjectFromArray(this.activities, 'id', this.userData.lang_seek_id);
 	}
 	submitForm () {
+		/*
+		 * set form to submitted = true
+		 */
 		this.formState.submitted = true;
 		if (this.myDataForm.$valid) {
-		if (typeof this.userData.token !== 'undefined') {
+			/*
+			 * update lang_have_id && lang_seek_id
+			 */
+			this.userData.lang_have_id = this.lang_have.id;
+			this.userData.lang_seek_id = this.lang_seek.id;
+			/*
+			 * submit
+			 */
+			if (typeof this.userData.token !== 'undefined') {
 				/**
 				 * change / update
 				 */
@@ -81,6 +88,6 @@ class MyDataController {
 }
 
 
-MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService'];
+MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService', 'FilterService'];
 
 export { MyDataController };

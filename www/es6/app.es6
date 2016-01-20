@@ -22,7 +22,7 @@ import { LanguageService } from './services/language-service';
 import { AlertService } from './services/alert-service';
 import { PositionService } from './services/position-service';
 
-angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
+angular.module('tandemApp', ['ngRoute', 'ui.slider'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {

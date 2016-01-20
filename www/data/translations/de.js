@@ -16,6 +16,7 @@ window.tandemAppConfig.translation.de = {
 	"city" : "meine Stadt heisst",
 	"description": "Ich suche",
 	"within" : "im Umkreis von",
+	"registration" : "Registrierung",
 	"my_data" : "Mein Daten",
 	"my_profile" : "Mein Gesuch",
 	"datenschutz" : "Datenschutz",

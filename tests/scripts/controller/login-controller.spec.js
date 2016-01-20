@@ -17,6 +17,8 @@ describe('Controller: LoginController', function () {
             data : {token : '123', email : 'blah@blau.com'}
         };
 
+    //{"token":"1371!1453283273","name":"keram","email":"keram@cafelingo.de","zip":"10234","city":"Berlin","lang_have_id":36,"lang_seek_id":36,"description":"jnjknjnj"}
+    //{"token":"1371!1453283273","name":"keram","email":"keram@cafelingo.de","zip":"10234","city":"Berlin","lang_have_id":36,"lang_seek_id":36,"description":"jnjknjnj"}
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope, $timeout, _$q_) {
         scope = $rootScope.$new();

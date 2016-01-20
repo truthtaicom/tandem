@@ -10,21 +10,20 @@
             <span data-ng-show="settings.language==='en'" class="icon-checkmark"></span>
         </div>
     </div>
-    <div class="row" data-ng-if="!settings.token">
-        <a class="btn" href="#/login">
+    <div class="row">
+        <a class="btn" href="#/login" data-ng-if="!settings.token">
             <span data-my-translation="login"></span>
             <span class="pull-right icon-pfeil-more"></span>
         </a>
-    </div>
-    <div class="row" data-ng-if="settings.token">
-        <a class="btn" href="" data-ng-click="settings.logout()">
+        <a class="btn" href="" data-ng-click="settings.logout()" data-ng-if="settings.token">
             <span data-my-translation="logout"></span>
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>
     <div class="row">
         <a class="btn" href="#/data">
-            <span data-my-translation="my_data"></span>
+            <span data-my-translation="registration" data-ng-if="!settings.token"></span>
+            <span data-my-translation="my_data" data-ng-if="settings.token"></span>
             <span class="pull-right icon-pfeil-more"></span>
         </a>
     </div>

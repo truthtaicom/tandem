@@ -1,5 +1,5 @@
 class LoginController {
-    constructor(languageSettings, LanguageService, $location, DataService, encKey) {
+    constructor (languageSettings, LanguageService, $location, DataService, encKey) {
         // DI
         this.languageSettings = languageSettings;
         this.LanguageService = LanguageService;
@@ -23,7 +23,7 @@ class LoginController {
 
     }
 
-    submit() {
+    submit () {
         let postData = {
             username: window.GibberishAES.enc(this.userData.username, this.encKey),
             password: window.GibberishAES.enc(this.userData.password, this.encKey)
