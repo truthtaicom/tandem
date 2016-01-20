@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     del = require('del'),
     sourcemaps = require('gulp-sourcemaps'),
     Server = require('karma').Server,
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'),
+    replace = require('gulp-replace');
 
 var paths = {
     temp: './www/temp/',
@@ -17,6 +18,12 @@ var paths = {
     sass: './www/scss/**/*.scss',
     es6: './www/es6/**/*.es6'
 };
+
+gulp.task('replace', ['commonjs'], function() {
+    gulp.src([paths.scripts+'bundle.js'])
+        .pipe(replace(/localhost\/cafelingo\/api\/tandem/g, 'cafelingo.de/private/api/tandem'))
+        .pipe(gulp.dest(paths.scripts));
+});
 
 gulp.task('clean-temp', function(){
     return del([paths.temp]);
@@ -50,7 +57,7 @@ gulp.task('commonjs',['babel', 'clean-scripts'], function(){
 
 gulp.task('watch', function() {
     gulp.watch(paths.sass, ['sass']);
-    gulp.watch(paths.es6, ['eslint', 'commonjs']);
+    gulp.watch(paths.es6, ['eslint', 'commonjs', 'replace']);
 });
 
 gulp.task('sass', function(done) {
@@ -104,3 +111,4 @@ gulp.task('connect', function() {
 
 // Start the tasks
 gulp.task('default', ['connect', 'watch']);
+gulp.task('build', ['commonjs', 'replace']);

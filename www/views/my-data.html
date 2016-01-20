@@ -1,0 +1,86 @@
+<div class="close">
+    <a href="#/settings">
+        <span class="icon-close"></span>
+    </a>
+</div>
+<div class="container">
+    <div class="success" data-ng-if="mydata.formState.success">
+        <span data-my-translation="success_change" data-ng-if="mydata.userData.token"></span>
+        <span data-my-translation="success_registration" data-ng-if="!mydata.userData.token"></span>
+    </div>
+    <div class="error" data-ng-if="mydata.formState.error">
+        <span data-my-translation="error_change" data-ng-if="mydata.userData.token"></span>
+        <span data-my-translation="error_registration" data-ng-if="!mydata.userData.token"></span>
+    </div>
+    <form name="mydata.myDataForm" data-ng-submit="mydata.submitForm()" novalidate>
+        <div class="row">
+            <span class="label" data-my-translation="name"></span>
+            <input  type="text"
+                    name="name"
+                    required
+                    data-ng-model="mydata.userData.name">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.name.$valid">
+                <span data-my-translation="error_name"></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="email"></span>
+            <input  type="text"
+                    name="email"
+                    required
+                    data-ng-model="mydata.userData.email">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.email.$valid">
+                <span data-my-translation="error_email"></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="zip"></span>
+            <input  type="text"
+                    name="zip"
+                    required
+                    data-ng-model="mydata.userData.zip">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.zip.$valid">
+                <span data-my-translation="error_zip"></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="city"></span>
+            <input  type="text"
+                    name="city"
+                    required
+                    data-ng-model="mydata.userData.city">
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.city.$valid">
+                <span data-my-translation="error_city"></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="description"></span>
+            <textarea   name="description"
+                        data-ng-model="mydata.userData.description"
+                        required></textarea>
+            <div class="error" data-ng-if="mydata.formState.submitted && !mydata.myDataForm.description.$valid">
+                <span data-my-translation="error_description"></span>
+            </div>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="my_native_language"></span>
+            <select name="offerSelect" id="offerSelect"
+                    data-ng-options="option.name for option in mydata.activities track by option.id"
+                    data-ng-model="mydata.lang_have"></select>
+        </div>
+        <div class="row">
+            <span class="label" data-my-translation="my_sought_language"></span>
+            <select name="searchSelect" id="searchSelect"
+                    data-ng-options="option.name for option in mydata.activities track by option.id"
+                    data-ng-model="mydata.lang_seek"></select>
+        </div>
+        <div data-ng-show="!mydata.formState.success">
+            <button type="submit" class="btn text-center" data-ng-if="!mydata.userData.token">
+                <span data-my-translation="signup"></span>
+            </button>
+            <button type="submit" class="btn text-center" data-ng-if="mydata.userData.token">
+                <span data-my-translation="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>

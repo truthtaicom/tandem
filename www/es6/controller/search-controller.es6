@@ -44,7 +44,6 @@ class SearchController {
 				this.AlertService.alerts.retrieving_searchresults = false;
 				this.$rootScope.$broadcast('show-alert');
 				if (data && data.data.length > 0) {
-					console.log('data.data : ', data.data);
 					let randomize = this.randomizeResults();
 					this.searchResults = randomize(data.data);
 					localStorage.setItem('tandemApp_lastSearch_results', JSON.stringify(this.searchResults));
@@ -58,7 +57,6 @@ class SearchController {
 		 * wait 2 seconds to see if the user actually changed the distance
 		 */
 		this.$timeout(() => {
-			console.log('this.lastSelectedDistance : ', this.lastSelectedDistance, ' this.selectedDistance ', this.selectedDistance);
 			if (this.lastSelectedDistance !== this.selectedDistance) {
 				this.drawRadar();
 				this.drawUsers();
@@ -121,7 +119,6 @@ class SearchController {
 				document.getElementById('forRadar').children[0].remove();
 			}
 
-			console.log('this.width : ', this.width, ' this.height ', this.height);
 			let radius = 10,
 				radarRingCounter = 0,
 				minRadiusFor5Rings = parseInt(this.width, 10) / 1.2 / 5;

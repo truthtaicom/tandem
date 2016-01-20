@@ -10,7 +10,7 @@ class FilterService {
         return newArray;
     }
     filterObjectFromArray (arr, prop, val) {
-            var returnObj = {};
+        var returnObj = {};
         angular.forEach(arr, (_val) => {
             if (parseInt(_val[prop]) === parseInt(val)) {
                 returnObj = _val;

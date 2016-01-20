@@ -9,8 +9,8 @@ describe('Service: PositionService', function () {
         posObj = {
             id: 1,
             name: 'Aachen',
-            latitude: '50.783',
-            longitude: '6.083'
+            latitude: 50.783,
+            longitude: 6.083
         };
 
     // Initialize the controller and a mock scope

@@ -65,9 +65,17 @@ select {
 .row{
   margin: 5px 0;
 }
+.g25{
+  float: left;
+  width: 25%;
+}
 .g33{
   float: left;
   width: 33%;
+}
+.g50{
+  float: left;
+  width: 50%;
 }
 .text-center{
   text-align: center;
@@ -81,6 +89,33 @@ select {
   left: 0;
   width: 90%;
   padding: 0 5% 0 5%;
+}
+/*
+ *
+ */
+.switch {
+  overflow: auto;
+  > div {
+    min-height: 34px;
+    line-height: 34px;
+    span {
+      line-height: 34px;
+    }
+
+    &.active {
+      background-color: $color-green-light;
+      color: $color-white;
+    }
+  }
+}
+/*
+ * float
+ */
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
 }
 /**
  * icons
@@ -100,4 +135,50 @@ select {
 }
 .red-font{
   color: $color-red;
+}
+
+/*
+ * Forms
+ */
+.label{
+  font-size: 80%;
+}
+
+/*
+ * close
+ */
+.close {
+  z-index: 1000;
+  color: white;
+  display: block;
+  position: absolute;
+  margin: 15px;
+}
+
+/**
+ * success
+ */
+.success {
+  background-color: $color-green;
+  display: block;
+  overflow: auto;
+  span {
+    padding: 5px;
+    color: $color-white;
+    display: block;
+  }
+}
+
+/**
+ * error
+ */
+.error {
+  background-color: $color-red;
+  display: block;
+  overflow: auto;
+  span {
+    padding: 5px;
+    color: $color-white;
+    display: block;
+  }
 }

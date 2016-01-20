@@ -6,7 +6,7 @@
   background-color: $color-green-light;
   @include border-radius(6px);
   border: 1px solid $color-green-light;
-  color: $color-white;
+  color: $color-white !important;
   text-decoration: none;
   text-shadow: none;
   padding: 5px 5% 5px 5%;
@@ -15,6 +15,12 @@
   &:hover{
     background-color: $color-green-light;
   }
+  span{
+    font-size: 34px;
+  }
+}
+button{
+  width: 100%;
 }
 a.search-button,
 .search-button
@@ -33,4 +39,8 @@ a.search-button:active,
     margin-top: 25px;
     font-size: 50px;
   }
+}
+.btn-border-green{
+  background-color: $color-white !important;
+  color: $color-green-light !important;
 }

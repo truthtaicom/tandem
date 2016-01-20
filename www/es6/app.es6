@@ -6,6 +6,8 @@ import { activitiesData } from './data/activities/activities';
 import { MainController } from './controller/main-controller';
 import { SearchController } from './controller/search-controller';
 import { SettingsController } from './controller/settings-controller';
+import { MyDataController } from './controller/my-data-controller';
+import { LoginController } from './controller/login-controller';
 import { AlertController } from './controller/alert-controller';
 import { FooterController } from './controller/footer-controller';
 
@@ -20,7 +22,7 @@ import { LanguageService } from './services/language-service';
 import { AlertService } from './services/alert-service';
 import { PositionService } from './services/position-service';
 
-angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
+angular.module('tandemApp', ['ngRoute', 'ui.slider'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -38,6 +40,22 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
                 controller: 'SettingsController',
                 controllerAs: 'settings'
             })
+			.when('/data', {
+				templateUrl: 'views/my-data.html',
+				controller: 'MyDataController',
+				controllerAs: 'mydata'
+			})
+			.when('/login', {
+				templateUrl: 'views/login.html',
+				controller: 'LoginController',
+				controllerAs: 'login'
+			})
+			.when('/impressum', {
+				templateUrl: 'views/impressum.html'
+			})
+			.when('/datenschutz', {
+				templateUrl: 'views/datenschutz.html'
+			})
             .otherwise({
                 redirectTo: '/'
             });
@@ -47,6 +65,7 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
         {id: 'de', name: 'Deutsch'},
         {id: 'en', name: 'English'}
     ])
+	.constant('encKey', '2343desdfsf!"§$ffds44')
     .constant('defaultDistance', 10)
     .constant('maxDistance', 100)
     .constant('svgIcon',
@@ -61,6 +80,8 @@ angular.module('tandemApp', ['ngRoute', 'ngSanitize', 'ui.slider'])
     .controller('MainController', MainController)
     .controller('SearchController', SearchController)
     .controller('SettingsController', SettingsController)
+	.controller('MyDataController', MyDataController)
+	.controller('LoginController', LoginController)
     .controller('AlertController', AlertController)
     .controller('FooterController', FooterController)
     .service('ActivitiesService', ActivitiesService)
