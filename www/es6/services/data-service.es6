@@ -32,6 +32,11 @@ class DataService {
 			'register' +
 			'?time=' + new Date().getTime(), data);
 	}
+	contactTandem (data) {
+		return this.$http.post(this.restApiUrl +
+			'contact_tandem' +
+			'?time=' + new Date().getTime(), data);
+	}
 
 }
 

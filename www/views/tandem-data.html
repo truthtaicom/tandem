@@ -1,0 +1,55 @@
+<div class="modal">
+    <div class="close">
+        <a data-ng-click="tandemProfile.close()">
+            <span class="icon-close"></span>
+        </a>
+    </div>
+    <div class="container profile">
+        <div class="success" data-ng-if="tandemProfile.formState.success">
+            <span data-my-translation="success_contact"></span>
+        </div>
+        <div class="error" data-ng-if="tandemProfile.formState.error">
+            <span data-my-translation="error_contact"></span>
+        </div>
+        <h3 class="text-center">{{tandemProfile.tandemData.name}}</h3>
+        <div class="row description">&quot;{{tandemProfile.tandemData.description}}&quot;</div>
+        <div class="row"><span data-my-translation="contact_person"></span>&nbsp;<span data-ng-bind="tandemProfile.tandemData.name"></span> : </div>
+        <form name="tandemProfile.myTandemForm" data-ng-submit="tandemProfile.submitForm()" novalidate>
+            <div class="row">
+                <span class="label" data-my-translation="name"></span>
+                <input  type="text"
+                        name="name"
+                        required
+                        data-ng-model="tandemProfile.formData.name">
+                <div class="error" data-ng-if="tandemProfile.formState.submitted && !tandemProfile.myTandemForm.name.$valid">
+                    <span data-my-translation="error_name"></span>
+                </div>
+            </div>
+            <div class="row">
+                <span class="label" data-my-translation="email"></span>
+                <input  type="text"
+                        name="email"
+                        required
+                        data-ng-model="tandemProfile.formData.email">
+                <div class="error" data-ng-if="tandemProfile.formState.submitted && !tandemProfile.myTandemForm.email.$valid">
+                    <span data-my-translation="error_email"></span>
+                </div>
+            </div>
+            <div class="row">
+                <span class="label" data-my-translation="text"></span>
+                <textarea   name="text"
+                            data-ng-model="tandemProfile.formData.text"
+                            required></textarea>
+                <div class="error" data-ng-if="tandemProfile.formState.submitted && !tandemProfile.myTandemForm.text.$valid">
+                    <span data-my-translation="error_text"></span>
+                </div>
+            </div>
+            <div data-ng-show="!tandemProfile.formState.success">
+                <button type="submit" class="btn text-center">
+                    <span data-my-translation="submit"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

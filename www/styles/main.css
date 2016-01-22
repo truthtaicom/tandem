@@ -19,7 +19,7 @@ time, mark, audio, video, button {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font-family: 'open_sansregular';
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
@@ -44,7 +44,8 @@ select {
   padding: 5px 0;
   width: 100%;
   height: auto;
-  border: none; }
+  border: none;
+  font-family: 'open_sansregular'; }
 
 ol, ul {
   list-style: none; }
@@ -233,13 +234,21 @@ slider div.bubble, [slider] div.bubble {
 slider div.bubble.limit, [slider] div.bubble.limit {
   color: #777; }
 
+@font-face {
+  font-family: 'open_sansregular';
+  src: url("fonts/OpenSans-Regular-webfont.eot");
+  src: url("fonts/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/OpenSans-Regular-webfont.woff") format("woff"), url("fonts/OpenSans-Regular-webfont.ttf") format("truetype"), url("fonts/OpenSans-Regular-webfont.svg#open_sansregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 /**
  * Body
  */
 body {
   width: 100%;
   color: #777777;
-  background-color: #FFF; }
+  background-color: #FFF;
+  font-family: 'open_sansregular'; }
 
 input[type="text"],
 input[type="password"],
@@ -283,12 +292,21 @@ select {
 
 .container {
   padding: 60px 5%; }
+  .modal > .container {
+    position: absolute;
+    height: 100%;
+    width: 90%;
+    background-color: white;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 9; }
 
 /**
  * divs
  */
 .row {
-  margin: 5px 0; }
+  margin: 10px 0; }
 
 .g25 {
   float: left;
@@ -370,6 +388,9 @@ select {
   display: block;
   position: absolute;
   margin: 15px; }
+  .modal > .close {
+    position: absolute;
+    top: 0; }
 
 /**
  * success
@@ -394,3 +415,13 @@ select {
     padding: 5px;
     color: #FFF;
     display: block; }
+
+/**
+ * user profile
+ */
+.profile h3 {
+  font-weight: bold;
+  margin: 10px 0 10px 0; }
+
+.profile .description {
+  font-style: italic; }

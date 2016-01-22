@@ -12,6 +12,7 @@ class SearchController {
 		// DI
 		this.$rootScope = $rootScope;
 		this.$timeout = $timeout;
+		this.$location = $location;
 		this.languageSettings = languageSettings;
 		this.ActivitiesService = ActivitiesService;
 		this.LanguageService = LanguageService;
@@ -21,11 +22,12 @@ class SearchController {
 		this.AlertService = AlertService;
 		this.PositionService = PositionService;
 		this.$rootScope.$broadcast('show-alert');
-		this.searchResults = [];
+		this.searchResults = {};
+		this.tandemData = {};
 		this.drawRadar();
 		if (!this.PositionService.chosenPosition.latitude || !this.PositionService.chosenPosition.longitude) {
 			this.AlertService.alerts.retrieving_searchresults = false;
-			$location.path('/');
+			this.$location.path('/');
 		} else if (
 			(parseInt(localStorage.getItem('tandemApp_lastSearch_offerId')) === parseInt(localStorage.getItem('tandemApp_activities_offerId'))) &&
 			(parseInt(localStorage.getItem('tandemApp_lastSearch_searchId')) === parseInt(localStorage.getItem('tandemApp_activities_searchId'))) &&
@@ -73,13 +75,14 @@ class SearchController {
 			quote = resultDistance / selectDistance;
 		return [x2 * quote, y2 * quote];
 	}
-	drawImage (x, y) {
+	drawImage (id, x, y) {
 		let mySvg,
 			mySrc,
 			source;
 		mySvg = this.svg;
 		mySrc = 'data:image/svg+xml;base64,' + window.btoa(mySvg);
 		source = new Image();
+		source.id = 'user_' + id;
 		source.src = mySrc;
 		source.onload = () => {
 			this.context.globalAlpha = 0.8;
@@ -154,7 +157,7 @@ class SearchController {
 				var thisX = parseInt(e.clientX, 10),
 					thisY = parseInt(e.clientY, 10);
 
-				for (let i = 0; i < this.searchResults.length; i++) {
+				angular.forEach(this.searchResults, (result) => {
 					/*
 					 * check if any of the people in the array have the coordinates clicked
 					 * (+/- 5px as this is the radius)
@@ -162,19 +165,23 @@ class SearchController {
 					 *  --- substract 60 px because of header !!! ---> 0 at the moment
 					 * (look above : we substracted 120px from total height)
 					 */
-
 					if (
-						((parseInt(this.searchResults[i].x) + parseInt(this.svgWidth)) >= thisX && this.searchResults[i].x <= thisX) &&
-						((parseInt(this.searchResults[i].y) + parseInt(this.svgWidth)) >= (thisY - 60) && this.searchResults[i].y <= thisY - 60)
+						((parseInt(result.x) + parseInt(this.svgWidth)) >= thisX && result.x <= thisX) &&
+						((parseInt(result.y) + parseInt(this.svgWidth)) >= (thisY - 60) && result.y <= thisY - 60)
 					) {
 						//currentProfileIndex=i;
-						console.log('User ', i, ' searchResults : ', this.searchResults[i]);
-
+						console.log('User ', result);
+						//this.$location.path('#tandem/' + result.id);
+						this.$timeout(() => {
+							//this.$location.path('/iii');
+							//console.log('this.$location : ', this.$location);
+							this.tandemData = result;
+						});
+						//localStorage.setItem('tandemApp_lastSearch_tandemData', JSON.stringify(result));
+						//this.$rootScope.$broadcast('tandem-data-found');
 					}
-				}
-
+				});
 			};
-
 			return true;
 		} else {
 			return false;
@@ -221,7 +228,7 @@ class SearchController {
 				 */
 				this.searchResults[resultArrayCounter].x = newX;
 				this.searchResults[resultArrayCounter].y = newY;
-				this.drawImage(this.searchResults[resultArrayCounter].x, this.searchResults[resultArrayCounter].y);
+				this.drawImage(this.searchResults[resultArrayCounter].tandem_id, this.searchResults[resultArrayCounter].x, this.searchResults[resultArrayCounter].y);
 			}
 			if (parseInt(resultArrayCounter) + 1 === this.searchResults.length) {
 				done = true;

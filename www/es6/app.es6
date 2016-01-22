@@ -13,6 +13,7 @@ import { FooterController } from './controller/footer-controller';
 
 // directives
 import { TranslationDirective } from './directives/translation-directive';
+import { TandemProfileDirective } from './directives/tandem-profile-directive';
 
 // services
 import { DataService } from './services/data-service';
@@ -90,4 +91,5 @@ angular.module('tandemApp', ['ngRoute', 'ui.slider'])
     .service('AlertService', AlertService)
     .service('DataService', DataService)
     .service('PositionService', PositionService)
-    .directive('myTranslation', TranslationDirective.directiveFactory);
+    .directive('myTranslation', TranslationDirective.directiveFactory)
+    .directive('tandemProfile', TandemProfileDirective.directiveFactory);

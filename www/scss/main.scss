@@ -3,6 +3,7 @@
 @import "buttons";
 @import "icons";
 @import "slider";
+@import "typography";
 /**
  * Body
  */
@@ -10,6 +11,7 @@ body{
   width: 100%;
   color: $color-grey;
   background-color: $color-white;
+  font-family: 'open_sansregular';
 }
 input[type="text"],
 input[type="password"],
@@ -57,13 +59,22 @@ select {
 }
 .container{
   padding: 60px 5%;
+  .modal > & {
+    position: absolute;
+    height: 100%;
+    width: 90%;
+    background-color: white;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
 }
-
 /**
  * divs
  */
 .row{
-  margin: 5px 0;
+  margin: 10px 0;
 }
 .g25{
   float: left;
@@ -153,6 +164,10 @@ select {
   display: block;
   position: absolute;
   margin: 15px;
+  .modal > & {
+    position: absolute;
+    top: 0;
+  }
 }
 
 /**
@@ -180,5 +195,18 @@ select {
     padding: 5px;
     color: $color-white;
     display: block;
+  }
+}
+
+/**
+ * user profile
+ */
+.profile{
+  h3{
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+  }
+  .description{
+    font-style: italic;
   }
 }
