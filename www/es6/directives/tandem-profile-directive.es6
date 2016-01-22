@@ -8,7 +8,9 @@ class TandemProfileDirective {
             'tandemData': '='
         };
         this.controllerAs = 'tandemProfile';
-        this.controller = function (DataService) {
+        this.controller = function (ActivitiesService, DataService) {
+			this.ActivitiesService = ActivitiesService;
+			this.DataService = DataService;
             this.close = function () {
                 delete this.tandemData;
             };
@@ -35,9 +37,8 @@ class TandemProfileDirective {
             };
             this.submitForm = () => {
                 this.formState.submitted = true;
-                console.log('this.myTandemForm.$valid : ', this.myTandemForm.$valid);
                 if (this.myTandemForm.$valid) {
-                    DataService.contactTandem(this.formData).then((returnData) => {
+                    this.DataService.contactTandem(this.formData).then((returnData) => {
                         console.log('returnData : ', returnData);
                         if (returnData.data && returnData.data.toString() === 'true') {
                             this.formState.success = true;
@@ -55,12 +56,12 @@ class TandemProfileDirective {
         };
     }
 
-    static directiveFactory (DataService) {
-        TandemProfileDirective.instance = new TandemProfileDirective(DataService);
+    static directiveFactory (ActivitiesService, DataService) {
+        TandemProfileDirective.instance = new TandemProfileDirective(ActivitiesService, DataService);
         return TandemProfileDirective.instance;
     }
 }
 
-TandemProfileDirective.$inject = ['DataService'];
+TandemProfileDirective.$inject = ['ActivitiesService', 'DataService'];
 
 export { TandemProfileDirective };

@@ -1,9 +1,10 @@
 class SettingsController {
-    constructor (languageSettings, LanguageService, ActivitiesService) {
+    constructor ($route, languageSettings, LanguageService, ActivitiesService) {
         // DI
         this.languageSettings = languageSettings;
         this.LanguageService = LanguageService;
 		this.ActivitiesService = ActivitiesService;
+		this.$route = $route;
 		// local vars
 		this.language = this.LanguageService.selectedLanguage;
         this.data = {
@@ -17,16 +18,18 @@ class SettingsController {
         this.language = id;
         this.LanguageService.resetLanguage(this.language);
         //TODO : reload app
-        //window.location.reload();
+        //this.$window.location.reload();
+		this.$route.reload();
     }
 	logout () {
 		localStorage.removeItem('tandemApp_userData');
 		this.token = null;
 		//TODO : reload app
-		//window.location.reload();
+		//this.$window.location.reload();
+		this.$route.reload();
 	}
 }
 
-SettingsController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService'];
+SettingsController.$inject = ['$route', 'languageSettings', 'LanguageService', 'ActivitiesService'];
 
 export { SettingsController };
