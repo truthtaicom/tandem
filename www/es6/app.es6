@@ -8,6 +8,7 @@ import { SearchController } from './controller/search-controller';
 import { SettingsController } from './controller/settings-controller';
 import { MyDataController } from './controller/my-data-controller';
 import { LoginController } from './controller/login-controller';
+import { ResetController } from './controller/reset-controller';
 import { AlertController } from './controller/alert-controller';
 import { FooterController } from './controller/footer-controller';
 
@@ -51,6 +52,11 @@ angular.module('tandemApp', ['ngRoute', 'ui.slider'])
 				controller: 'LoginController',
 				controllerAs: 'login'
 			})
+            .when('/reset', {
+                templateUrl: 'views/reset.html',
+                controller: 'ResetController',
+                controllerAs: 'reset'
+            })
 			.when('/impressum', {
 				templateUrl: 'views/impressum.html'
 			})
@@ -83,6 +89,7 @@ angular.module('tandemApp', ['ngRoute', 'ui.slider'])
     .controller('SettingsController', SettingsController)
 	.controller('MyDataController', MyDataController)
 	.controller('LoginController', LoginController)
+    .controller('ResetController', ResetController)
     .controller('AlertController', AlertController)
     .controller('FooterController', FooterController)
     .service('ActivitiesService', ActivitiesService)

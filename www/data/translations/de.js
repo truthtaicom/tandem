@@ -27,11 +27,12 @@ window.tandemAppConfig.translation.de = {
 	"logout" : "Ausloggen",
 	"signup" : "Anmelden",
 	"submit" : "Absenden",
-	"password" : "Passwort",
-	"forgot_password" : "Passwort vergessen",
+	"password" : "Kennwort",
+	"password_reset" : "Kennwort zurücksetzen",
 	"success_change" : "Die Änderung war erfolgreich",
 	"success_registration" : "Die Registrierung war erfolgreich",
 	"success_contact" : "Eine Email wurde versendet",
+	"success_reset" : "Dein Kennwort wurde zurückgesetzt. Du solltest eine Email von uns erhalten haben.",
 	"error" : "Fehler",
 	"error_login" : "Ein Fehler beim Login trat auf",
 	"error_username" : "Der Benutzername fehlt",
@@ -44,5 +45,6 @@ window.tandemAppConfig.translation.de = {
 	"error_change" : "Die Änderung konnte nicht gespeichert werden",
 	"error_registration" : "Ein Fehler bei der Registrierung trat auf",
 	"error_text" : "Bitte gib einen Text ein",
-	"error_contact" : "Leider konnte die Person nicht kontaktiert werden"
+	"error_contact" : "Leider konnte die Person nicht kontaktiert werden",
+	"error_reset" : "Leider konnte dein Kennwort nicht zurückgesetzt werden"
 };

@@ -28,10 +28,11 @@ window.tandemAppConfig.translation.en = {
 	"signup" : "Sign up",
 	"submit" : "Submit",
 	"password" : "Password",
-	"forgot_password" : "Reset password",
+	"password_reset" : "Reset password",
 	"success_change" : "Successfully changed",
 	"success_registration" : "Successfully registered",
 	"success_contact" : "An email has been sent",
+	"success_reset" : "Your password has been reset. Please check your e-mail inbox.",
 	"error" : "Error",
 	"error_login" : "An error occurred when trying to login",
 	"error_username" : "The username is missing",
@@ -44,5 +45,6 @@ window.tandemAppConfig.translation.en = {
 	"error_change" : "The data could not be updated",
 	"error_registration" : "An error occurred while registering",
 	"error_text" : "Please input a text",
-	"error_contact" : "We are afraid, but the person could not be contacted"
+	"error_contact" : "We are afraid, but the person could not be contacted",
+	"error_reset" : "We are afraid, but your password could not be reset"
 };

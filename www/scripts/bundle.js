@@ -15,6 +15,8 @@ var _myDataController = require('./controller/my-data-controller');
 
 var _loginController = require('./controller/login-controller');
 
+var _resetController = require('./controller/reset-controller');
+
 var _alertController = require('./controller/alert-controller');
 
 var _footerController = require('./controller/footer-controller');
@@ -39,6 +41,9 @@ var _positionService = require('./services/position-service');
 
 // directives
 
+// controller
+// data
+
 angular.module('tandemApp', ['ngRoute', 'ui.slider']).config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
@@ -60,6 +65,10 @@ angular.module('tandemApp', ['ngRoute', 'ui.slider']).config(['$routeProvider', 
         templateUrl: 'views/login.html',
         controller: 'LoginController',
         controllerAs: 'login'
+    }).when('/reset', {
+        templateUrl: 'views/reset.html',
+        controller: 'ResetController',
+        controllerAs: 'reset'
     }).when('/impressum', {
         templateUrl: 'views/impressum.html'
     }).when('/datenschutz', {
@@ -67,13 +76,10 @@ angular.module('tandemApp', ['ngRoute', 'ui.slider']).config(['$routeProvider', 
     }).otherwise({
         redirectTo: '/'
     });
-}]).constant('restApiUrl', 'http://cafelingo.de/private/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('encKey', '2343desdfsf!"§$ffds44').constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('MyDataController', _myDataController.MyDataController).controller('LoginController', _loginController.LoginController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory).directive('tandemProfile', _tandemProfileDirective.TandemProfileDirective.directiveFactory);
-
-// controller
-// data
+}]).constant('restApiUrl', 'http://cafelingo.de/private/api/tandem/').constant('languageSettings', [{ id: 'de', name: 'Deutsch' }, { id: 'en', name: 'English' }]).constant('encKey', '2343desdfsf!"§$ffds44').constant('defaultDistance', 10).constant('maxDistance', 100).constant('svgIcon', '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">' + '<path d="M311.413 351.368c-11.055-1.759-11.307-32.157-11.307-32.157s32.484-32.158 39.564-75.401c19.045 0 30.809-45.973 11.761-62.148 0.795-17.027 24.48-133.662-95.431-133.662s-96.225 116.635-95.432 133.662c-19.047 16.175-7.285 62.148 11.761 62.148 7.079 43.243 39.564 75.401 39.564 75.401s-0.252 30.398-11.307 32.157c-35.61 5.666-168.586 64.317-168.586 128.632h448c0-64.315-132.976-122.966-168.587-128.632z"></path>' + '</svg>').constant('positionsData', _de.positionsData).constant('activitiesData', _activities.activitiesData).run(function () {}).controller('MainController', _mainController.MainController).controller('SearchController', _searchController.SearchController).controller('SettingsController', _settingsController.SettingsController).controller('MyDataController', _myDataController.MyDataController).controller('LoginController', _loginController.LoginController).controller('ResetController', _resetController.ResetController).controller('AlertController', _alertController.AlertController).controller('FooterController', _footerController.FooterController).service('ActivitiesService', _activitiesService.ActivitiesService).service('FilterService', _filterService.FilterService).service('LanguageService', _languageService.LanguageService).service('AlertService', _alertService.AlertService).service('DataService', _dataService.DataService).service('PositionService', _positionService.PositionService).directive('myTranslation', _translationDirective.TranslationDirective.directiveFactory).directive('tandemProfile', _tandemProfileDirective.TandemProfileDirective.directiveFactory);
 
 
-},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/login-controller":4,"./controller/main-controller":5,"./controller/my-data-controller":6,"./controller/search-controller":7,"./controller/settings-controller":8,"./data/activities/activities":9,"./data/positions/de":10,"./directives/tandem-profile-directive":11,"./directives/translation-directive":12,"./services/activities-service":13,"./services/alert-service":14,"./services/data-service":15,"./services/filter-service":16,"./services/language-service":17,"./services/position-service":18}],2:[function(require,module,exports){
+},{"./controller/alert-controller":2,"./controller/footer-controller":3,"./controller/login-controller":4,"./controller/main-controller":5,"./controller/my-data-controller":6,"./controller/reset-controller":7,"./controller/search-controller":8,"./controller/settings-controller":9,"./data/activities/activities":10,"./data/positions/de":11,"./directives/tandem-profile-directive":12,"./directives/translation-directive":13,"./services/activities-service":14,"./services/alert-service":15,"./services/data-service":16,"./services/filter-service":17,"./services/language-service":18,"./services/position-service":19}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -413,6 +419,72 @@ exports.MyDataController = MyDataController;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ResetController = function () {
+    function ResetController(languageSettings, LanguageService, DataService, encKey) {
+        _classCallCheck(this, ResetController);
+
+        // DI
+        this.languageSettings = languageSettings;
+        this.LanguageService = LanguageService;
+        this.DataService = DataService;
+        this.encKey = encKey;
+        // local vars
+        this.resetForm = {};
+        this.formState = {
+            submitted: false,
+            error: false,
+            success: false
+        };
+        this.language = this.LanguageService.selectedLanguage;
+        this.userData = {
+            username: '',
+            lang_used: this.language
+        };
+    }
+
+    _createClass(ResetController, [{
+        key: 'submit',
+        value: function submit() {
+            var _this = this;
+
+            this.formState.submitted = true;
+
+            if (this.resetForm.$valid) {
+                this.DataService.postReset(this.userData).then(function (data) {
+                    if (data.data.toString() === 'true') {
+                        _this.formState.error = false;
+                        _this.formState.success = true;
+                    } else {
+                        _this.formState.error = true;
+                        _this.formState.success = false;
+                    }
+                }, function () {
+                    _this.formState.error = true;
+                    _this.formState.success = false;
+                });
+            }
+        }
+    }]);
+
+    return ResetController;
+}();
+
+ResetController.$inject = ['languageSettings', 'LanguageService', 'DataService', 'encKey'];
+
+exports.ResetController = ResetController;
+
+
+},{}],8:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
@@ -685,7 +757,7 @@ SearchController.$inject = ['$rootScope', '$timeout', 'svgIcon', '$location', 'd
 exports.SearchController = SearchController;
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -739,7 +811,7 @@ SettingsController.$inject = ['languageSettings', 'LanguageService', 'Activities
 exports.SettingsController = SettingsController;
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1188,7 +1260,7 @@ var activitiesData = exports.activitiesData = [{
 }];
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1397,7 +1469,7 @@ var positionsData = exports.positionsData = [{
 }];
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1485,7 +1557,7 @@ TandemProfileDirective.$inject = ['DataService'];
 exports.TandemProfileDirective = TandemProfileDirective;
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1530,7 +1602,7 @@ TranslationDirective.$inject = ['LanguageService'];
 exports.TranslationDirective = TranslationDirective;
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1581,7 +1653,7 @@ ActivitiesService.$inject = ['activitiesData', 'FilterService', 'LanguageService
 exports.ActivitiesService = ActivitiesService;
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1605,7 +1677,7 @@ AlertService.$inject = [];
 exports.AlertService = AlertService;
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1639,6 +1711,11 @@ var DataService = function () {
 			return this.$http.post(this.restApiUrl + 'login' + '?time=' + new Date().getTime(), data);
 		}
 	}, {
+		key: 'postReset',
+		value: function postReset(data) {
+			return this.$http.post(this.restApiUrl + 'reset' + '?time=' + new Date().getTime(), data);
+		}
+	}, {
 		key: 'postChange',
 		value: function postChange(data) {
 			return this.$http.post(this.restApiUrl + 'change' + '?time=' + new Date().getTime(), data);
@@ -1663,7 +1740,7 @@ DataService.$inject = ['$http', 'restApiUrl', 'ActivitiesService', 'PositionServ
 exports.DataService = DataService;
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1709,7 +1786,7 @@ FilterService.$inject = [];
 exports.FilterService = FilterService;
 
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1743,7 +1820,7 @@ LanguageService.$inject = [];
 exports.LanguageService = LanguageService;
 
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();

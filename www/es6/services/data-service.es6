@@ -22,6 +22,11 @@ class DataService {
 			'login' +
 			'?time=' + new Date().getTime(), data);
 	}
+	postReset (data) {
+		return this.$http.post(this.restApiUrl +
+			'reset' +
+			'?time=' + new Date().getTime(), data);
+	}
 	postChange (data) {
 		return this.$http.post(this.restApiUrl +
 			'change' +
