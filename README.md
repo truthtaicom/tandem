@@ -15,6 +15,12 @@ With gulp
 
 *Versions*
 
+Version 0.1.0
+- Connect with Live API
+
+Version 0.0.5
+- Reset password
+
 Version 0.0.4
 - Contact a person
 
