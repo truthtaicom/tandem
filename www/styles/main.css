@@ -74,12 +74,12 @@ a:active {
 
 .btn {
   display: block;
-  background-color: #8bc717;
+  background-color: #96c11f;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   border-radius: 6px;
-  border: 1px solid #8bc717;
+  border: 1px solid #96c11f;
   color: #FFF !important;
   text-decoration: none;
   text-shadow: none;
@@ -87,7 +87,7 @@ a:active {
   margin: 5px 0 5px 0;
   min-height: 34px; }
   .btn:hover {
-    background-color: #8bc717; }
+    background-color: #96c11f; }
   .btn span {
     font-size: 34px; }
 
@@ -120,7 +120,7 @@ a.search-button:hover span,
 
 .btn-border-green {
   background-color: #FFF !important;
-  color: #8bc717 !important; }
+  color: #96c11f !important; }
 
 @font-face {
   font-family: 'scooped';
@@ -280,14 +280,15 @@ select {
 .header {
   top: 0;
   height: 60px;
+  line-height: 60px;
   padding: 0 5%;
-  background-color: #8bc717; }
+  background-color: #96c11f; }
 
 .footer {
   bottom: 0;
   height: 50px;
   padding: 0 5%;
-  background-color: #8bc717;
+  background-color: #96c11f;
   color: #FFF;
   font-size: 30px; }
   .footer > div {
@@ -347,7 +348,7 @@ select {
     .switch > div span {
       line-height: 34px; }
     .switch > div.active {
-      background-color: #8bc717;
+      background-color: #96c11f;
       color: #FFF; }
 
 /*
@@ -371,7 +372,7 @@ select {
  * Fonts
  */
 .green-font {
-  color: #8bc717; }
+  color: #96c11f; }
 
 .red-font {
   color: #f00; }
@@ -399,7 +400,7 @@ select {
  * success
  */
 .success {
-  background-color: #14cd00;
+  background-color: #0b983a;
   display: block;
   overflow: auto; }
   .success span {

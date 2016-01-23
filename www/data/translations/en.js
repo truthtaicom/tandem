@@ -46,5 +46,7 @@ window.tandemAppConfig.translation.en = {
 	"error_registration" : "The data could not be saved",
 	"error_text" : "Please input a text",
 	"error_contact" : "We are afraid, but the person could not be contacted",
-	"error_reset" : "We are afraid, but your password could not be reset"
+	"error_reset" : "We are afraid, but your password could not be reset",
+	"retrieving_position" : "We are retrieving your position",
+	"retrieving_searchresults" : "We are retrieving the results"
 };

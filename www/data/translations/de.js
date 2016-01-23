@@ -46,5 +46,7 @@ window.tandemAppConfig.translation.de = {
 	"error_registration" : "Die Daten konnte nicht gespeichert werden",
 	"error_text" : "Bitte gib einen Text ein",
 	"error_contact" : "Leider konnte die Person nicht kontaktiert werden",
-	"error_reset" : "Leider konnte dein Kennwort nicht zurückgesetzt werden"
+	"error_reset" : "Leider konnte dein Kennwort nicht zurückgesetzt werden",
+	"retrieving_position" : "Deine Position wird bestimmt",
+	"retrieving_searchresults" : "Die Daten werden geladen"
 };

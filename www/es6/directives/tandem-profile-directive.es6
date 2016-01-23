@@ -2,7 +2,7 @@ class TandemProfileDirective {
     constructor () {
         this.restrict = 'A';
         this.transclude = true;
-        this.templateUrl = '../views/tandem-data.html'; //'<span>{{tandemProfile.tandemData}}</span>';
+        this.templateUrl = 'views/tandem-data.html'; //'<span>{{tandemProfile.tandemData}}</span>';
         this.scope = {};
         this.bindToController = {
             'tandemData': '='

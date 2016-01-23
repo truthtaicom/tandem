@@ -169,16 +169,9 @@ class SearchController {
 						((parseInt(result.x) + parseInt(this.svgWidth)) >= thisX && result.x <= thisX) &&
 						((parseInt(result.y) + parseInt(this.svgWidth)) >= (thisY - 60) && result.y <= thisY - 60)
 					) {
-						//currentProfileIndex=i;
-						console.log('User ', result);
-						//this.$location.path('#tandem/' + result.id);
 						this.$timeout(() => {
-							//this.$location.path('/iii');
-							//console.log('this.$location : ', this.$location);
 							this.tandemData = result;
 						});
-						//localStorage.setItem('tandemApp_lastSearch_tandemData', JSON.stringify(result));
-						//this.$rootScope.$broadcast('tandem-data-found');
 					}
 				});
 			};

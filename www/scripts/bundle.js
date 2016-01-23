@@ -100,7 +100,9 @@ var AlertController = function AlertController($rootScope, LanguageService, Aler
 	this.LanguageService = LanguageService;
 	this.language = this.LanguageService.selectedLanguage;
 	this.$rootScope.$on('show-alert', function () {
+		console.log('showing alert');
 		_this.alerts = _this.AlertService.alerts;
+		console.log('this.alerts : ', _this.alerts);
 	});
 };
 
@@ -258,6 +260,7 @@ var MainController = function () {
 				window.tandemAppConfig.geoLocation();
 				this.AlertService.alerts.retrieving_position = true;
 				this.$rootScope.$broadcast('show-alert');
+				console.log('HERE !!!');
 				this.$timeout(function () {
 					_this.showAlert();
 				}, 2000, true);
@@ -676,16 +679,9 @@ var SearchController = function () {
        * (look above : we substracted 120px from total height)
        */
 						if (parseInt(result.x) + parseInt(_this5.svgWidth) >= thisX && result.x <= thisX && parseInt(result.y) + parseInt(_this5.svgWidth) >= thisY - 60 && result.y <= thisY - 60) {
-							//currentProfileIndex=i;
-							console.log('User ', result);
-							//this.$location.path('#tandem/' + result.id);
 							_this5.$timeout(function () {
-								//this.$location.path('/iii');
-								//console.log('this.$location : ', this.$location);
 								_this5.tandemData = result;
 							});
-							//localStorage.setItem('tandemApp_lastSearch_tandemData', JSON.stringify(result));
-							//this.$rootScope.$broadcast('tandem-data-found');
 						}
 					});
 				};
@@ -1489,7 +1485,7 @@ var TandemProfileDirective = function () {
 
         this.restrict = 'A';
         this.transclude = true;
-        this.templateUrl = '../views/tandem-data.html'; //'<span>{{tandemProfile.tandemData}}</span>';
+        this.templateUrl = 'views/tandem-data.html'; //'<span>{{tandemProfile.tandemData}}</span>';
         this.scope = {};
         this.bindToController = {
             'tandemData': '='
