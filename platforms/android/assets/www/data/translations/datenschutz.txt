@@ -1,0 +1,38 @@
+//DE
+
+    <h2>Datenschutzerklärung</h2>
+    <p>Die Nutzung unserer Seite ist ohne  eine Angabe von personenbezogenen Daten möglich. Für die Nutzung einzelner  Services unserer Seite können sich hierfür abweichende Regelungen ergeben, die in  diesem Falle nachstehend gesondert erläutert werden. Ihre personenbezogenen  Daten (z.B. Name, Anschrift, E-Mail, Telefonnummer, u.ä.) werden von uns nur  gemäß den Bestimmungen des deutschen Datenschutzrechts verarbeitet. Daten sind dann  personenbezogen, wenn sie eindeutig einer bestimmten natürlichen Person  zugeordnet werden können. Die rechtlichen Grundlagen des Datenschutzes finden  Sie im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG). Nachstehende  Regelungen informieren Sie insoweit über die Art, den Umfang und Zweck der  Erhebung, die Nutzung und die Verarbeitung von personenbezogenen Daten durch  den Anbieter</p>
+    <p>
+        Marek Sonnabend<br />
+        Stralauer Allee 35a<br />
+        10245 Berlin <br />
+    <p>
+    Tel: +49 (0) 30 53798695
+    </p>
+    <p>
+    E-Mail: <a href="mailto:i@marek-sonnabend.de">i@marek-sonnabend.de</a>
+    </p>
+    <p>Wir weisen darauf hin, dass die  internetbasierte Datenübertragung Sicherheitslücken aufweist, ein lückenloser  Schutz vor Zugriffen durch Dritte somit unmöglich ist.</p>
+
+    <h4>Cookies</h4>
+    <p>Wir  verwenden auf unserer Seite sog. Cookies zum Wiedererkennen mehrfacher Nutzung unseres  Angebots, durch denselben Nutzer/Internetanschlussinhaber. Cookies sind kleine  Textdateien, die Ihr Internet-Browser auf Ihrem Rechner ablegt und speichert.  Sie dienen dazu, unseren Internetauftritt und unsere Angebote zu optimieren. Es  handelt sich dabei zumeist um sog. "Session-Cookies", die nach dem  Ende Ihres Besuches wieder gelöscht werden.<br>
+        Teilweise  geben diese Cookies jedoch Informationen ab, um Sie automatisch wieder zu  erkennen. Diese Wiedererkennung erfolgt aufgrund der in den Cookies  gespeicherten IP-Adresse. Die so erlangten Informationen dienen dazu, unsere  Angebote zu optimieren und Ihnen einen leichteren Zugang auf unsere Seite zu  ermöglichen.<br>
+        Sie können  die Installation der Cookies durch eine entsprechende Einstellung Ihres  Browsers verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall  gegebenenfalls nicht sämtliche Funktionen unserer Website vollumfänglich nutzen  können.</p>
+
+    <h4>Serverdaten</h4>
+    <p>
+        Aus technischen Gründen werden u.a. folgende Daten, die Ihr Internet-Browser an uns übermittelt, erfasst (sogenannte Serverlogfiles): <br>
+        <br>
+        - Das Betriebsystem und dessen Version ihres Telefons<br>
+        - Die UUID ihres Telefons<br>
+        - Ihre Position (Geolocation)
+        <br>
+        Diese anonymen Daten werden getrennt von Ihren eventuell angegebenen personenbezogenen  Daten gespeichert und lassen so keine Rückschlüsse auf eine bestimmte Person  zu. Sie werden zu statistischen Zwecken ausgewertet, um unsere Angebote optimieren zu können. </p>
+
+    <h4>Kontaktmöglichkeit</h4>
+    <p>Wir  bieten Ihnen auf unserer Seite die Möglichkeit, mit uns per E-Mail und/oder  über ein Kontaktformular in Verbindung zu treten. In diesem Fall werden die vom  Nutzer gemachten Angaben zum Zwecke der Bearbeitung seiner Kontaktaufnahme  gespeichert. Eine Weitergabe an Dritte erfolgt nicht. Ein Abgleich der so  erhobenen Daten mit Daten, die möglicherweise durch andere Komponenten unserer  Seite erhoben werden, erfolgt ebenfalls nicht.</p>
+
+    <h3>Auskunft/Widerruf/Löschung</h3>
+    <p>Sie können  sich aufgrund des Bundesdatenschutzgesetzes bei Fragen zur Erhebung, Verarbeitung  oder Nutzung Ihrer personenbezogenen Daten und deren Berichtigung, Sperrung,  Löschung oder einem Widerruf einer erteilten Einwilligung unentgeltlich an uns  wenden. Wir weisen darauf hin, dass Ihnen ein Recht auf Berichtigung falscher  Daten oder Löschung personenbezogener Daten zusteht, sollte diesem Anspruch  keine gesetzliche Aufbewahrungspflicht entgegenstehen.</p>
+
+
