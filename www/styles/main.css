@@ -393,7 +393,7 @@ select {
   position: absolute;
   margin: 25px 0 0 20px; }
   .modal > .close {
-    position: absolute;
+    position: fixed;
     top: 0; }
 
 /**
@@ -402,7 +402,8 @@ select {
 .success {
   background-color: #0b983a;
   display: block;
-  overflow: auto; }
+  overflow: auto;
+  margin-top: 15px; }
   .success span {
     padding: 5px;
     color: #FFF;
@@ -414,7 +415,8 @@ select {
 .error {
   background-color: #f00;
   display: block;
-  overflow: auto; }
+  overflow: auto;
+  margin-top: 15px; }
   .error span {
     padding: 5px;
     color: #FFF;

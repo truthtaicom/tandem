@@ -2,6 +2,7 @@ window.tandemAppConfig = window.tandemAppConfig || {};
 window.tandemAppConfig.translation = window.tandemAppConfig.translation || {};
 window.tandemAppConfig.translation.de = {
     "language" : "Sprache",
+	"hello": "Hallo",
     "en" : "English",
     "de" : "Deutsch",
     "i_search_someone_to": "Ich möchte",

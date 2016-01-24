@@ -15,6 +15,9 @@ With gulp
 
 *Versions*
 
+Version 0.1.2
+- Minor bug fixes
+
 Version 0.1.1
 - Connect with Live API
 

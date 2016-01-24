@@ -1,11 +1,12 @@
 class MyDataController {
-	constructor (languageSettings, LanguageService, ActivitiesService, DataService, FilterService) {
+	constructor (languageSettings, LanguageService, ActivitiesService, DataService, FilterService, $timeout) {
 		// DI
 		this.languageSettings = languageSettings;
 		this.LanguageService = LanguageService;
 		this.ActivitiesService = ActivitiesService;
 		this.DataService = DataService;
 		this.FilterService = FilterService;
+		this.$timeout = $timeout;
 		// local vars
 		this.myDataForm = {};
 		this.formState = {
@@ -53,13 +54,25 @@ class MyDataController {
 						localStorage.setItem('tandemApp_userData', JSON.stringify(this.userData));
 						this.formState.success = true;
 						this.formState.error = false;
+						//scroll to top
+						this.$timeout(()=> {
+							window.scrollTo(0, 0);
+						});
 					} else {
 						this.formState.success = false;
 						this.formState.error = true;
+						//scroll to top
+						this.$timeout(()=> {
+							window.scrollTo(0, 0);
+						});
 					}
 				}, () => {
 					this.formState.success = false;
 					this.formState.error = true;
+					//scroll to top
+					this.$timeout(()=> {
+						window.scrollTo(0, 0);
+					});
 				});
 			} else {
 				/**
@@ -69,18 +82,33 @@ class MyDataController {
 				this.userData.lon = typeof window.longitude !== 'undefined' ? window.longitude : 0;
 				this.userData.lang_used = this.language;
 				this.DataService.postRegistration(this.userData).then((data) => {
+
+					//toggle formState
 					if (typeof data.data.token !== 'undefined') {
 						this.userData = data.data;
 						localStorage.setItem('tandemApp_userData', JSON.stringify(this.userData));
 						this.formState.success = true;
 						this.formState.error = false;
+						//scroll to top
+						this.$timeout(()=> {
+							window.scrollTo(0, 0);
+						});
 					} else {
 						this.formState.success = false;
 						this.formState.error = true;
+						//scroll to top
+						this.$timeout(()=> {
+							window.scrollTo(0, 0);
+						});
 					}
 				}, () => {
+					//toggle formState
 					this.formState.success = false;
 					this.formState.error = true;
+					//scroll to top
+					this.$timeout(()=> {
+						window.scrollTo(0, 0);
+					});
 				});
 			}
 		}
@@ -88,6 +116,6 @@ class MyDataController {
 }
 
 
-MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService', 'FilterService'];
+MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService', 'FilterService', '$timeout'];
 
 export { MyDataController };

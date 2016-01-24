@@ -8,9 +8,10 @@ class TandemProfileDirective {
             'tandemData': '='
         };
         this.controllerAs = 'tandemProfile';
-        this.controller = function (ActivitiesService, DataService) {
+        this.controller = function (ActivitiesService, DataService, $timeout) {
 			this.ActivitiesService = ActivitiesService;
 			this.DataService = DataService;
+			this.$timeout = $timeout;
             this.close = function () {
                 delete this.tandemData;
             };
@@ -43,25 +44,37 @@ class TandemProfileDirective {
                         if (returnData.data && returnData.data.toString() === 'true') {
                             this.formState.success = true;
                             this.formState.error = false;
+							//scroll to top
+							this.$timeout(()=> {
+								window.scrollTo(0, 0);
+							});
                         } else {
                             this.formState.success = false;
                             this.formState.error = true;
+							//scroll to top
+							this.$timeout(()=> {
+								window.scrollTo(0, 0);
+							});
                         }
                     }, () => {
                         this.formState.success = false;
                         this.formState.error = true;
+						//scroll to top
+						this.$timeout(()=> {
+							window.scrollTo(0, 0);
+						});
                     });
                 }
             };
         };
     }
 
-    static directiveFactory (ActivitiesService, DataService) {
-        TandemProfileDirective.instance = new TandemProfileDirective(ActivitiesService, DataService);
+    static directiveFactory (ActivitiesService, DataService, $timeout) {
+        TandemProfileDirective.instance = new TandemProfileDirective(ActivitiesService, DataService, $timeout);
         return TandemProfileDirective.instance;
     }
 }
 
-TandemProfileDirective.$inject = ['ActivitiesService', 'DataService'];
+TandemProfileDirective.$inject = ['ActivitiesService', 'DataService', '$timeout'];
 
 export { TandemProfileDirective };

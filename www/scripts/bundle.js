@@ -100,9 +100,7 @@ var AlertController = function AlertController($rootScope, LanguageService, Aler
 	this.LanguageService = LanguageService;
 	this.language = this.LanguageService.selectedLanguage;
 	this.$rootScope.$on('show-alert', function () {
-		console.log('showing alert');
 		_this.alerts = _this.AlertService.alerts;
-		console.log('this.alerts : ', _this.alerts);
 	});
 };
 
@@ -151,7 +149,7 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var LoginController = function () {
-    function LoginController(languageSettings, LanguageService, $location, DataService, encKey) {
+    function LoginController(languageSettings, LanguageService, $location, DataService, encKey, $timeout) {
         _classCallCheck(this, LoginController);
 
         // DI
@@ -160,6 +158,7 @@ var LoginController = function () {
         this.DataService = DataService;
         this.encKey = encKey;
         this.$location = $location;
+        this.$timeout = $timeout;
         // local vars
         this.loginForm = {};
         this.formState = {
@@ -198,12 +197,23 @@ var LoginController = function () {
                         _this.userData = userData;
                         // and save in localstorage
                         localStorage.setItem('tandemApp_userData', JSON.stringify(_this.userData));
+                        // forward
                         _this.$location.path('/settings');
                     } else {
+                        //toggle formState
                         _this.formState.error = true;
+                        //scroll to top
+                        _this.$timeout(function () {
+                            window.scrollTo(0, 0);
+                        });
                     }
                 }, function () {
+                    //toggle formState
                     _this.formState.error = true;
+                    //scroll to top
+                    _this.$timeout(function () {
+                        window.scrollTo(0, 0);
+                    });
                 });
             }
         }
@@ -212,7 +222,7 @@ var LoginController = function () {
     return LoginController;
 }();
 
-LoginController.$inject = ['languageSettings', 'LanguageService', '$location', 'DataService', 'encKey'];
+LoginController.$inject = ['languageSettings', 'LanguageService', '$location', 'DataService', 'encKey', '$timeout'];
 
 exports.LoginController = LoginController;
 
@@ -260,7 +270,6 @@ var MainController = function () {
 				window.tandemAppConfig.geoLocation();
 				this.AlertService.alerts.retrieving_position = true;
 				this.$rootScope.$broadcast('show-alert');
-				console.log('HERE !!!');
 				this.$timeout(function () {
 					_this.showAlert();
 				}, 2000, true);
@@ -311,7 +320,7 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MyDataController = function () {
-	function MyDataController(languageSettings, LanguageService, ActivitiesService, DataService, FilterService) {
+	function MyDataController(languageSettings, LanguageService, ActivitiesService, DataService, FilterService, $timeout) {
 		_classCallCheck(this, MyDataController);
 
 		// DI
@@ -320,6 +329,7 @@ var MyDataController = function () {
 		this.ActivitiesService = ActivitiesService;
 		this.DataService = DataService;
 		this.FilterService = FilterService;
+		this.$timeout = $timeout;
 		// local vars
 		this.myDataForm = {};
 		this.formState = {
@@ -374,13 +384,25 @@ var MyDataController = function () {
 							localStorage.setItem('tandemApp_userData', JSON.stringify(_this.userData));
 							_this.formState.success = true;
 							_this.formState.error = false;
+							//scroll to top
+							_this.$timeout(function () {
+								window.scrollTo(0, 0);
+							});
 						} else {
 							_this.formState.success = false;
 							_this.formState.error = true;
+							//scroll to top
+							_this.$timeout(function () {
+								window.scrollTo(0, 0);
+							});
 						}
 					}, function () {
 						_this.formState.success = false;
 						_this.formState.error = true;
+						//scroll to top
+						_this.$timeout(function () {
+							window.scrollTo(0, 0);
+						});
 					});
 				} else {
 					/**
@@ -390,18 +412,33 @@ var MyDataController = function () {
 					this.userData.lon = typeof window.longitude !== 'undefined' ? window.longitude : 0;
 					this.userData.lang_used = this.language;
 					this.DataService.postRegistration(this.userData).then(function (data) {
+
+						//toggle formState
 						if (typeof data.data.token !== 'undefined') {
 							_this.userData = data.data;
 							localStorage.setItem('tandemApp_userData', JSON.stringify(_this.userData));
 							_this.formState.success = true;
 							_this.formState.error = false;
+							//scroll to top
+							_this.$timeout(function () {
+								window.scrollTo(0, 0);
+							});
 						} else {
 							_this.formState.success = false;
 							_this.formState.error = true;
+							//scroll to top
+							_this.$timeout(function () {
+								window.scrollTo(0, 0);
+							});
 						}
 					}, function () {
+						//toggle formState
 						_this.formState.success = false;
 						_this.formState.error = true;
+						//scroll to top
+						_this.$timeout(function () {
+							window.scrollTo(0, 0);
+						});
 					});
 				}
 			}
@@ -411,7 +448,7 @@ var MyDataController = function () {
 	return MyDataController;
 }();
 
-MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService', 'FilterService'];
+MyDataController.$inject = ['languageSettings', 'LanguageService', 'ActivitiesService', 'DataService', 'FilterService', '$timeout'];
 
 exports.MyDataController = MyDataController;
 
@@ -428,7 +465,7 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ResetController = function () {
-    function ResetController(languageSettings, LanguageService, DataService, encKey) {
+    function ResetController(languageSettings, LanguageService, DataService, encKey, $timeout) {
         _classCallCheck(this, ResetController);
 
         // DI
@@ -436,6 +473,7 @@ var ResetController = function () {
         this.LanguageService = LanguageService;
         this.DataService = DataService;
         this.encKey = encKey;
+        this.$timeout = $timeout;
         // local vars
         this.resetForm = {};
         this.formState = {
@@ -462,13 +500,25 @@ var ResetController = function () {
                     if (data.data.toString() === 'true') {
                         _this.formState.error = false;
                         _this.formState.success = true;
+                        //scroll to top
+                        _this.$timeout(function () {
+                            window.scrollTo(0, 0);
+                        });
                     } else {
                         _this.formState.error = true;
                         _this.formState.success = false;
+                        //scroll to top
+                        _this.$timeout(function () {
+                            window.scrollTo(0, 0);
+                        });
                     }
                 }, function () {
                     _this.formState.error = true;
                     _this.formState.success = false;
+                    //scroll to top
+                    _this.$timeout(function () {
+                        window.scrollTo(0, 0);
+                    });
                 });
             }
         }
@@ -477,7 +527,7 @@ var ResetController = function () {
     return ResetController;
 }();
 
-ResetController.$inject = ['languageSettings', 'LanguageService', 'DataService', 'encKey'];
+ResetController.$inject = ['languageSettings', 'LanguageService', 'DataService', 'encKey', '$timeout'];
 
 exports.ResetController = ResetController;
 
@@ -780,6 +830,7 @@ var SettingsController = function () {
 												selectedOption: this.language === 'de' ? this.languageSettings[0] : this.languageSettings[1]
 								};
 								this.token = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).token : null;
+								this.name = localStorage.getItem('tandemApp_userData') ? JSON.parse(localStorage.getItem('tandemApp_userData')).name : '';
 				}
 
 				_createClass(SettingsController, [{
@@ -787,8 +838,7 @@ var SettingsController = function () {
 								value: function changeLanguage(id) {
 												this.language = id;
 												this.LanguageService.resetLanguage(this.language);
-												//TODO : reload app
-												//this.$window.location.reload();
+												//reload route
 												this.$route.reload();
 								}
 				}, {
@@ -796,8 +846,7 @@ var SettingsController = function () {
 								value: function logout() {
 												localStorage.removeItem('tandemApp_userData');
 												this.token = null;
-												//TODO : reload app
-												//this.$window.location.reload();
+												//reload route
 												this.$route.reload();
 								}
 				}]);
@@ -1491,11 +1540,12 @@ var TandemProfileDirective = function () {
             'tandemData': '='
         };
         this.controllerAs = 'tandemProfile';
-        this.controller = function (ActivitiesService, DataService) {
+        this.controller = function (ActivitiesService, DataService, $timeout) {
             var _this = this;
 
             this.ActivitiesService = ActivitiesService;
             this.DataService = DataService;
+            this.$timeout = $timeout;
             this.close = function () {
                 delete this.tandemData;
             };
@@ -1528,13 +1578,25 @@ var TandemProfileDirective = function () {
                         if (returnData.data && returnData.data.toString() === 'true') {
                             _this.formState.success = true;
                             _this.formState.error = false;
+                            //scroll to top
+                            _this.$timeout(function () {
+                                window.scrollTo(0, 0);
+                            });
                         } else {
                             _this.formState.success = false;
                             _this.formState.error = true;
+                            //scroll to top
+                            _this.$timeout(function () {
+                                window.scrollTo(0, 0);
+                            });
                         }
                     }, function () {
                         _this.formState.success = false;
                         _this.formState.error = true;
+                        //scroll to top
+                        _this.$timeout(function () {
+                            window.scrollTo(0, 0);
+                        });
                     });
                 }
             };
@@ -1543,8 +1605,8 @@ var TandemProfileDirective = function () {
 
     _createClass(TandemProfileDirective, null, [{
         key: 'directiveFactory',
-        value: function directiveFactory(ActivitiesService, DataService) {
-            TandemProfileDirective.instance = new TandemProfileDirective(ActivitiesService, DataService);
+        value: function directiveFactory(ActivitiesService, DataService, $timeout) {
+            TandemProfileDirective.instance = new TandemProfileDirective(ActivitiesService, DataService, $timeout);
             return TandemProfileDirective.instance;
         }
     }]);
@@ -1552,7 +1614,7 @@ var TandemProfileDirective = function () {
     return TandemProfileDirective;
 }();
 
-TandemProfileDirective.$inject = ['ActivitiesService', 'DataService'];
+TandemProfileDirective.$inject = ['ActivitiesService', 'DataService', '$timeout'];
 
 exports.TandemProfileDirective = TandemProfileDirective;
 

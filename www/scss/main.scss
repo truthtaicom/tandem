@@ -167,7 +167,7 @@ select {
   position: absolute;
   margin: 25px 0 0 20px;
   .modal > & {
-    position: absolute;
+    position: fixed;
     top: 0;
   }
 }
@@ -179,6 +179,7 @@ select {
   background-color: $color-green;
   display: block;
   overflow: auto;
+  margin-top: 15px;
   span {
     padding: 5px;
     color: $color-white;
@@ -193,6 +194,7 @@ select {
   background-color: $color-red;
   display: block;
   overflow: auto;
+  margin-top: 15px;
   span {
     padding: 5px;
     color: $color-white;

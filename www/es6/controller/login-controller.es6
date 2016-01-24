@@ -1,11 +1,12 @@
 class LoginController {
-    constructor (languageSettings, LanguageService, $location, DataService, encKey) {
+    constructor (languageSettings, LanguageService, $location, DataService, encKey, $timeout) {
         // DI
         this.languageSettings = languageSettings;
         this.LanguageService = LanguageService;
         this.DataService = DataService;
         this.encKey = encKey;
         this.$location = $location;
+		this.$timeout = $timeout;
         // local vars
         this.loginForm = {};
         this.formState = {
@@ -41,18 +42,30 @@ class LoginController {
                     this.userData = userData;
                     // and save in localstorage
                     localStorage.setItem('tandemApp_userData', JSON.stringify(this.userData));
+					// forward
                     this.$location.path('/settings');
                 } else {
+					//toggle formState
                     this.formState.error = true;
+					//scroll to top
+					this.$timeout(()=> {
+						window.scrollTo(0, 0);
+					});
                 }
+
             }, () => {
+				//toggle formState
                 this.formState.error = true;
+				//scroll to top
+				this.$timeout(()=> {
+					window.scrollTo(0, 0);
+				});
             });
 
         }
     }
 }
 
-LoginController.$inject = ['languageSettings', 'LanguageService', '$location', 'DataService', 'encKey'];
+LoginController.$inject = ['languageSettings', 'LanguageService', '$location', 'DataService', 'encKey', '$timeout'];
 
 export { LoginController };

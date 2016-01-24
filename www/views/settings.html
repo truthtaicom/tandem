@@ -10,6 +10,9 @@
             <span data-ng-show="settings.language==='en'" class="icon-checkmark"></span>
         </div>
     </div>
+    <div class="row" data-ng-if="settings.token">
+        <span data-my-translation="hello"></span> <span data-ng-bind="settings.name"></span>
+    </div>
     <div class="row">
         <a class="btn" href="#/login" data-ng-if="!settings.token">
             <span data-my-translation="login"></span>
